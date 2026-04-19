@@ -1,4 +1,4 @@
-<section class="mx-auto max-w-[1170px] px-4 py-16">
+<section class="mx-auto max-w-[80%] pb-40 px-4 py-16">
     <!-- Header -->
     <div class="mb-12 text-center">
         <p class="font-heading text-sm font-semibold uppercase tracking-[3px] text-[#cc0000]">Our Blog</p>
@@ -12,10 +12,10 @@
         <!-- Card 1 -->
         <article class="service-card overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
             <div class="p-6">
-                <h3 class="mb-3 font-heading text-[27px] font-bold leading-snug text-[#1c1c25]">
+                <h3 class="mb-3 font-heading text-[37px] font-bold leading-snug text-[#1c1c25]">
                     The Hidden ROI of Modern Security Systems: Turning Costs into Value
                 </h3>
-                <p class="mb-4 text-sm leading-[26px] text-gray-500">
+                <p class="mb-4 text-2xl leading-[30px] text-gray-500">
                     In the past, businesses saw security systems only as a cost for...
                 </p>
                 <a href="#" class="flex items-center gap-1 font-heading text-lg font-semibold text-[#cc0000] underline hover:no-underline">
@@ -26,10 +26,10 @@
 
         <article class="service-card overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
             <div class="p-6">
-                <h3 class="mb-3 font-heading text-[27px] font-bold leading-snug text-[#1c1c25]">
+                <h3 class="mb-3 font-heading text-[37px] font-bold leading-snug text-[#1c1c25]">
                     The Hidden ROI of Modern Security Systems: Turning Costs into Value
                 </h3>
-                <p class="mb-4 text-sm leading-[26px] text-gray-500">
+                <p class="mb-4 text-2xl leading-[30px] text-gray-500">
                     In the past, businesses saw security systems only as a cost for...
                 </p>
                 <a href="#" class="flex items-center gap-1 font-heading text-lg font-semibold text-[#cc0000] underline hover:no-underline">
@@ -39,10 +39,10 @@
         </article>
         <article class="service-card overflow-hidden bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
             <div class="p-6">
-                <h3 class="mb-3 font-heading text-[27px] font-bold leading-snug text-[#1c1c25]">
+                <h3 class="mb-3 font-heading text-[37px] font-bold leading-snug text-[#1c1c25]">
                     The Hidden ROI of Modern Security Systems: Turning Costs into Value
                 </h3>
-                <p class="mb-4 text-sm leading-[26px] text-gray-500">
+                <p class="mb-4 text-2xl leading-[30px] text-gray-500">
                     In the past, businesses saw security systems only as a cost for...
                 </p>
                 <a href="#" class="flex items-center gap-1 font-heading text-lg font-semibold text-[#cc0000] underline hover:no-underline">
