@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Trusted Security Service Phoenix, AZ | Trans-World Security')</title>
     <meta name="description" content="@yield('meta_description', 'Trans-World Security Systems offers trained security guards and robust security equipment for homes, offices, and events. #1 security consultant in Phoenix, AZ.')">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -27,6 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <style>
         .fade-slide { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
@@ -47,6 +49,9 @@
             height: 2px;
             background: #ee1a28;
             transition: width 0.3s ease;
+        }
+        body {
+            font-family: "Roboto", sans-serif;
         }
         .nav-link:hover::after { width: 100%; }
         .dots-btn {
@@ -72,5 +77,23 @@
     @include('partials.footer')
 
     @stack('scripts')
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#e02020',
+                        navy: '#1a1f6e',
+                        ink: '#0b0f1e',
+                    },
+                    fontFamily: {
+                        heading: ['Oswald', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>
