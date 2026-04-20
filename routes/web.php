@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\HomeCtaController;
 use App\Http\Controllers\Admin\HomeStatController;
 use App\Http\Controllers\Admin\OurValueController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Models\AboutPage;
@@ -17,6 +18,7 @@ use App\Models\HomeCta;
 use App\Models\HomeStat;
 use App\Models\OurValue;
 use App\Models\Service;
+use App\Models\Testimonial;
 use App\Models\WhyChooseItem;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +33,7 @@ Route::get('/', function () {
         'whyChooseItems' => WhyChooseItem::query()->orderBy('position')->orderBy('id')->get(),
         'ourValues' => OurValue::query()->orderBy('sort_order')->orderBy('id')->get(),
         'homeCta' => HomeCta::content(),
+        'testimonials' => Testimonial::query()->orderBy('sort_order')->orderBy('id')->get(),
     ]);
 })->name('home');
 
@@ -87,6 +90,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('our-values', OurValueController::class)
         ->parameters(['our-values' => 'our_value'])
         ->except(['show']);
+
+    Route::resource('testimonials', TestimonialController::class)->except(['show']);
 
     Route::get('/why-choose-us/edit', [WhyChooseUsController::class, 'edit'])->name('why-choose-us.edit');
     Route::put('/why-choose-us', [WhyChooseUsController::class, 'update'])->name('why-choose-us.update');

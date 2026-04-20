@@ -44,7 +44,7 @@
                 Dashboard
             </a>
 
-            <details class="rounded-lg {{ request()->routeIs('admin.hero-slides.*', 'admin.home-features.*', 'admin.home-stats.*', 'admin.home-cta.*', 'admin.why-choose-us.*', 'admin.our-values.*') ? 'bg-white/5' : '' }}" {{ request()->routeIs('admin.hero-slides.*', 'admin.home-features.*', 'admin.home-stats.*', 'admin.home-cta.*', 'admin.why-choose-us.*', 'admin.our-values.*') ? 'open' : '' }}>
+            <details class="rounded-lg {{ request()->routeIs('admin.hero-slides.*', 'admin.home-features.*', 'admin.home-stats.*', 'admin.home-cta.*', 'admin.why-choose-us.*', 'admin.our-values.*', 'admin.testimonials.*') ? 'bg-white/5' : '' }}" {{ request()->routeIs('admin.hero-slides.*', 'admin.home-features.*', 'admin.home-stats.*', 'admin.home-cta.*', 'admin.why-choose-us.*', 'admin.our-values.*', 'admin.testimonials.*') ? 'open' : '' }}>
                 <summary class="flex cursor-pointer list-none items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/75 transition marker:content-none hover:bg-white/5 hover:text-white [&::-webkit-details-marker]:hidden">
                     <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-white/15 font-heading text-xs font-bold">H</span>
                     <span class="flex-1 text-left">Home page</span>
@@ -74,6 +74,10 @@
                     <a href="{{ route('admin.our-values.index') }}"
                        class="{{ request()->routeIs('admin.our-values.*') ? 'bg-white/10 text-white' : 'text-white/75 hover:bg-white/5 hover:text-white' }} block rounded-lg px-3 py-2 text-sm transition">
                         Our Values
+                    </a>
+                    <a href="{{ route('admin.testimonials.index') }}"
+                       class="{{ request()->routeIs('admin.testimonials.*') ? 'bg-white/10 text-white' : 'text-white/75 hover:bg-white/5 hover:text-white' }} block rounded-lg px-3 py-2 text-sm transition">
+                        Testimonials
                     </a>
                 </div>
             </details>
@@ -129,6 +133,7 @@
                 <a href="{{ route('admin.about-page.edit') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">About</a>
                 <a href="{{ route('admin.services.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Services</a>
                 <a href="{{ route('admin.our-values.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Values</a>
+                <a href="{{ route('admin.testimonials.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Reviews</a>
             </div>
             <div class="hidden lg:block">
                 <h1 class="font-heading text-xl font-bold uppercase tracking-wide text-ink">@yield('heading', 'Dashboard')</h1>

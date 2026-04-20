@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             AboutPageSeeder::class,
             ServiceSeeder::class,
             OurValueSeeder::class,
+            TestimonialSeeder::class,
             AdminUserSeeder::class,
         ]);
     }

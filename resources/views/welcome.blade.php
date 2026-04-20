@@ -56,7 +56,7 @@
             }
 
             createSlider("[data-hero-slide]", 5000, "heroPrev", "heroNext", "#heroDots [data-dot]");
-            createSlider("[data-testimonial-slide]", 4500, null, null, "#testimonialDots [data-tdot]");
+            createSlider("[data-testimonial-slide]", 4500, "testimonialPrev", "testimonialNext", "#testimonialDots [data-tdot]");
 
             document.querySelectorAll("[data-counter]").forEach(function (counter) {
                 const target = Number(counter.getAttribute("data-counter") || "0");
