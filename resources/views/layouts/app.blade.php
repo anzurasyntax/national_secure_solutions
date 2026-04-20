@@ -54,6 +54,18 @@
             font-family: "Roboto", sans-serif;
         }
         .nav-link:hover::after { width: 100%; }
+        .nav-link-inner { position: relative; }
+        .nav-link-inner::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ee1a28;
+            transition: width 0.3s ease;
+        }
+        .nav-link-inner:hover::after { width: 100%; }
         .dots-btn {
             width: 10px;
             height: 10px;
@@ -76,6 +88,22 @@
 
     @include('partials.footer')
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            [
+                ['menuButton', 'mobileMenu'],
+                ['menuButtonInner', 'mobileMenuInner'],
+            ].forEach(function (ids) {
+                var btn = document.getElementById(ids[0]);
+                var menu = document.getElementById(ids[1]);
+                if (btn && menu) {
+                    btn.addEventListener('click', function () {
+                        menu.classList.toggle('hidden');
+                    });
+                }
+            });
+        });
+    </script>
     @stack('scripts')
     <script>
         tailwind.config = {

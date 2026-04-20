@@ -16,14 +16,6 @@
 @push('scripts')
     <script>
         (function () {
-            const menuButton = document.getElementById("menuButton");
-            const mobileMenu = document.getElementById("mobileMenu");
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener("click", function () {
-                    mobileMenu.classList.toggle("hidden");
-                });
-            }
-
             function createSlider(selector, interval, prevId, nextId, dotsSelector) {
                 const slides = Array.from(document.querySelectorAll(selector));
                 const dots = dotsSelector ? Array.from(document.querySelectorAll(dotsSelector)) : [];

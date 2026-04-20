@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\SiteSetting;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('layouts.app', function ($view): void {
+            if (! Schema::hasTable('site_settings')) {
+                $view->with('siteSetting', new SiteSetting(SiteSetting::defaultAttributes()));
+
+                return;
+            }
+
+            $view->with('siteSetting', SiteSetting::current());
+        });
     }
 }
