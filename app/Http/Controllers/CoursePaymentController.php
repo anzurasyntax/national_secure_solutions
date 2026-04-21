@@ -18,8 +18,16 @@ class CoursePaymentController extends Controller
         private readonly CoursePurchaseService $purchaseService,
     ) {}
 
+    /**
+     * Signed return URL used only by the fake payment gateway (local/test checkout).
+     * Real Stripe payments must complete via stripeSuccess(); this route must never fulfill Stripe orders.
+     */
     public function paymentReturn(CourseOrder $order): RedirectResponse
     {
+        if (($order->payment_gateway ?? '') !== 'fake') {
+            abort(403, 'This completion URL is only valid for the test payment flow.');
+        }
+
         $allowed = [
             CourseOrderStatus::Pending->value,
             CourseOrderStatus::Paid->value,
@@ -35,6 +43,10 @@ class CoursePaymentController extends Controller
         return $this->redirectAfterPaid($order->fresh());
     }
 
+    /**
+     * Stripe Checkout success redirect. Unauthenticated; {@see StripePaymentVerifier} binds session_id to the order.
+     * Idempotent once the order is paid (safe if the customer refreshes or replays the URL).
+     */
     public function stripeSuccess(Request $request, StripePaymentVerifier $verifier, CourseOrder $order): RedirectResponse
     {
         $allowed = [

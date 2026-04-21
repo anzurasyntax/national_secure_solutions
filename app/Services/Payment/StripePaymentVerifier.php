@@ -31,6 +31,20 @@ class StripePaymentVerifier
             throw new \RuntimeException('Could not verify payment with Stripe: '.$e->getMessage(), 0, $e);
         }
 
+        return $this->verifySessionObjectForOrder($session, $order);
+    }
+
+    /**
+     * Confirms a Checkout Session object matches the order and payment succeeded.
+     * Used by the browser return handler and by Stripe webhooks.
+     *
+     * @param  object  $session  Checkout Session from the API or webhook payload.
+     * @return array{session_id: string, payment_intent: ?string}
+     *
+     * @throws \RuntimeException
+     */
+    public function verifySessionObjectForOrder(object $session, CourseOrder $order): array
+    {
         $metaUuid = $session->metadata['course_order_uuid'] ?? null;
         if ($metaUuid !== $order->uuid) {
             throw new \RuntimeException('Payment session does not match this order.');

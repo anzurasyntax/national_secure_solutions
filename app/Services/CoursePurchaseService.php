@@ -89,21 +89,16 @@ class CoursePurchaseService
         $order->loadMissing('course');
 
         $mailable = new CoursePaymentSuccessfulMail($order);
-        $subject = $mailable->envelope()->subject ?? 'Payment confirmed';
-        $plainBody = view('emails.course-payment-successful-plain', ['order' => $order])->render();
 
-        Log::info('Course payment confirmation email', [
-            'to' => $email,
-            'subject' => $subject,
+        Log::info('Sending course payment confirmation email.', [
+            'order_uuid' => $order->uuid,
             'mailer' => config('mail.default'),
-            'body_plain' => trim($plainBody),
         ]);
 
         try {
             Mail::to($email)->send($mailable);
         } catch (\Throwable $e) {
-            Log::error('Failed to send course payment confirmation email', [
-                'to' => $email,
+            Log::error('Failed to send course payment confirmation email.', [
                 'order_uuid' => $order->uuid,
                 'exception' => $e->getMessage(),
             ]);
@@ -147,6 +142,10 @@ class CoursePurchaseService
 
     /**
      * Links paid orders by email to the user account (e.g. after login).
+     *
+     * Requires {@see User::$email} to be unique (default Laravel migration). Orders whose {@see CourseOrder::$buyer_email}
+     * equals this user’s email are claimed; a shared inbox could theoretically attach another person’s purchase—keep
+     * buyer_email accuracy at checkout and accept that policy, or add verification (e.g. magic link) if needed later.
      */
     public function attachPaidOrdersForUser(User $user): void
     {

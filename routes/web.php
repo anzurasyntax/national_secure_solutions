@@ -24,6 +24,7 @@ use App\Http\Controllers\CertificateVerifyController;
 use App\Http\Controllers\CourseCatalogController;
 use App\Http\Controllers\CourseCheckoutController;
 use App\Http\Controllers\CoursePaymentController;
+use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\Student\StudentCourseController;
 use App\Http\Controllers\Student\StudentDashboardController;
 use App\Models\AboutPage;
@@ -36,7 +37,12 @@ use App\Models\OurValue;
 use App\Models\Service;
 use App\Models\Testimonial;
 use App\Models\WhyChooseItem;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
+
+Route::post('/stripe/webhook', StripeWebhookController::class)
+    ->name('stripe.webhook')
+    ->withoutMiddleware([ValidateCsrfToken::class]);
 
 Route::get('/', function () {
     return view('welcome', [

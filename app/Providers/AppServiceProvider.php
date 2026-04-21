@@ -18,7 +18,15 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(PaymentGatewayContract::class, function (): PaymentGatewayContract {
-            return match (config('courses.payment_driver', 'stripe')) {
+            $driver = config('courses.payment_driver', 'stripe');
+
+            if ($driver === 'fake' && app()->environment('production')) {
+                throw new \RuntimeException(
+                    'COURSE_PAYMENT_DRIVER=fake is not allowed when APP_ENV=production. Use stripe with valid Stripe credentials.'
+                );
+            }
+
+            return match ($driver) {
                 'fake' => new FakePaymentGateway,
                 default => new StripeCoursePaymentGateway,
             };
