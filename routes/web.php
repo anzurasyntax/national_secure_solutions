@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\BlogPostController;
+use App\Http\Controllers\Admin\BlogTagController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CourseModuleController;
 use App\Http\Controllers\Admin\CourseOrderController;
@@ -16,6 +19,7 @@ use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateVerifyController;
 use App\Http\Controllers\CourseCatalogController;
 use App\Http\Controllers\CourseCheckoutController;
@@ -23,6 +27,7 @@ use App\Http\Controllers\CoursePaymentController;
 use App\Http\Controllers\Student\StudentCourseController;
 use App\Http\Controllers\Student\StudentDashboardController;
 use App\Models\AboutPage;
+use App\Models\BlogPost;
 use App\Models\HeroSlide;
 use App\Models\HomeCta;
 use App\Models\HomeFeature;
@@ -44,6 +49,7 @@ Route::get('/', function () {
         'ourValues' => OurValue::query()->orderBy('sort_order')->orderBy('id')->get(),
         'homeCta' => HomeCta::content(),
         'testimonials' => Testimonial::query()->orderBy('sort_order')->orderBy('id')->get(),
+        'blogPosts' => BlogPost::query()->published()->ordered()->limit(3)->get(),
     ]);
 })->name('home');
 
@@ -62,6 +68,10 @@ Route::get('/services', function () {
 Route::get('/training', function () {
     return view('training');
 })->name('training');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
 Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact-us');
@@ -128,6 +138,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/about-page', [AboutPageController::class, 'update'])->name('about-page.update');
 
         Route::resource('services', ServiceController::class)->except(['show']);
+
+        Route::resource('blog-posts', BlogPostController::class)->except(['show']);
+        Route::resource('blog-categories', BlogCategoryController::class)->except(['show']);
+        Route::resource('blog-tags', BlogTagController::class)->except(['show']);
 
         Route::resource('our-values', OurValueController::class)
             ->parameters(['our-values' => 'our_value'])

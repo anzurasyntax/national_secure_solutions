@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             AdminUserSeeder::class,
             SampleCourseSeeder::class,
+            BlogDemoSeeder::class,
         ]);
     }
 }

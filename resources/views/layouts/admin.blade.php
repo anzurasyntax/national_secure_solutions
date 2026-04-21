@@ -115,6 +115,33 @@
                 </div>
             </details>
 
+            <details class="rounded-lg {{ request()->routeIs('admin.blog-posts.*', 'admin.blog-categories.*', 'admin.blog-tags.*') ? 'bg-white/5' : '' }}" {{ request()->routeIs('admin.blog-posts.*', 'admin.blog-categories.*', 'admin.blog-tags.*') ? 'open' : '' }}>
+                <summary class="flex cursor-pointer list-none items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/75 transition marker:content-none hover:bg-white/5 hover:text-white [&::-webkit-details-marker]:hidden">
+                    <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white/15 text-white" aria-hidden="true">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 18H21a2.25 2.25 0 002.25-2.25v-7.5A2.25 2.25 0 0019.5 6h-7.5a2.25 2.25 0 00-2.25 2.25v12m6.75-15H3.75A2.25 2.25 0 001.5 6v12a2.25 2.25 0 002.25 2.25h10.5A2.25 2.25 0 0016.5 18v-7.5A2.25 2.25 0 0014.25 8.25h-7.5z"/></svg>
+                    </span>
+                    <span class="flex-1 text-left">Blog</span>
+                    <svg class="h-4 w-4 shrink-0 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </summary>
+                <div class="mt-1 space-y-1 border-l border-white/15 pb-1 pl-4 ml-7">
+                    <a href="{{ route('admin.blog-posts.index') }}"
+                       class="{{ request()->routeIs('admin.blog-posts.*') ? 'bg-white/10 text-white' : 'text-white/75 hover:bg-white/5 hover:text-white' }} flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition">
+                        <svg class="h-4 w-4 shrink-0 opacity-80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+                        Posts
+                    </a>
+                    <a href="{{ route('admin.blog-categories.index') }}"
+                       class="{{ request()->routeIs('admin.blog-categories.*') ? 'bg-white/10 text-white' : 'text-white/75 hover:bg-white/5 hover:text-white' }} flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition">
+                        <svg class="h-4 w-4 shrink-0 opacity-80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125h19.5M3.75 7.125v11.25c0 .621.504 1.125 1.125 1.125h14.25c.621 0 1.125-.504 1.125-1.125V7.125m-16.5 3.75h15"/></svg>
+                        Categories
+                    </a>
+                    <a href="{{ route('admin.blog-tags.index') }}"
+                       class="{{ request()->routeIs('admin.blog-tags.*') ? 'bg-white/10 text-white' : 'text-white/75 hover:bg-white/5 hover:text-white' }} flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition">
+                        <svg class="h-4 w-4 shrink-0 opacity-80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 9h.008v.008H6V9z"/></svg>
+                        Tags
+                    </a>
+                </div>
+            </details>
+
             <details class="rounded-lg {{ request()->routeIs('admin.courses.*', 'admin.course-orders.*') ? 'bg-white/5' : '' }}" {{ request()->routeIs('admin.courses.*', 'admin.course-orders.*') ? 'open' : '' }}>
                 <summary class="flex cursor-pointer list-none items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/75 transition marker:content-none hover:bg-white/5 hover:text-white [&::-webkit-details-marker]:hidden">
                     <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white/15 text-white" aria-hidden="true">
@@ -178,6 +205,7 @@
                 <a href="{{ route('admin.testimonials.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Reviews</a>
                 <a href="{{ route('admin.courses.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Courses</a>
                 <a href="{{ route('admin.course-orders.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Orders</a>
+                <a href="{{ route('admin.blog-posts.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Blog</a>
             </div>
             <div class="hidden lg:block">
                 <h1 class="font-heading text-xl font-bold uppercase tracking-wide text-ink">@yield('heading', 'Dashboard')</h1>

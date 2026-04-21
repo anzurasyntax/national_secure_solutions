@@ -62,7 +62,7 @@
                 <a href="{{ route('about') }}" class="nav-link text-[20px] text-white">About Us</a>
                 <a href="{{ route('services') }}" class="nav-link text-[20px] text-white">Services</a>
                 <a href="{{ route('training') }}" class="nav-link text-[20px] text-white">Training</a>
-                <a href="{{ url('/#blog') }}" class="nav-link text-[20px] text-white">Blog</a>
+                <a href="{{ route('blog') }}" class="nav-link text-[20px] text-white {{ request()->routeIs('blog') ? 'text-primary' : '' }}">Blog</a>
                 <a href="{{ route('contact-us') }}" class="nav-link text-[20px] text-white">Contact Us</a>
             </nav>
             <div class="flex items-center gap-2">
@@ -98,7 +98,7 @@
                 <a href="{{ route('about') }}" class="font-heading text-sm uppercase text-white hover:text-primary">About Us</a>
                 <a href="{{ route('services') }}" class="font-heading text-sm uppercase text-white hover:text-primary">Services</a>
                 <a href="{{ route('training') }}" class="font-heading text-sm uppercase text-white hover:text-primary">Training</a>
-                <a href="{{ url('/#blog') }}" class="font-heading text-sm uppercase text-white hover:text-primary">Blog</a>
+                <a href="{{ route('blog') }}" class="font-heading text-sm uppercase {{ request()->routeIs('blog') ? 'text-primary' : 'text-white hover:text-primary' }}">Blog</a>
                 <a href="{{ route('contact-us') }}" class="font-heading text-sm uppercase text-white hover:text-primary">Contact Us</a>
             </div>
         </div>
@@ -118,7 +118,7 @@
             <a href="{{ route('about') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[19px] {{ request()->routeIs('about') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">About Us</a>
             <a href="{{ route('services') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[19px] {{ request()->routeIs('services') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Services</a>
             <a href="{{ route('training') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[19px] {{ request()->routeIs('training') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Training</a>
-            <a href="{{ url('/#blog') }}" class="nav-link-inner font-heading text-[17px] font-semibold text-[#1c1c25] transition-colors hover:text-primary">Blog</a>
+            <a href="{{ route('blog') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[19px] {{ request()->routeIs('blog') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Blog</a>
             <a href="{{ route('contact-us') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[19px] {{ request()->routeIs('contact-us') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Contact Us</a>
         </nav>
 
@@ -153,7 +153,7 @@
             <a href="{{ route('about') }}" class="font-heading text-sm font-semibold uppercase tracking-wide {{ request()->routeIs('about') ? 'text-primary' : 'text-[#1c1c25]' }}">About Us</a>
             <a href="{{ route('services') }}" class="font-heading text-sm font-semibold uppercase tracking-wide {{ request()->routeIs('services') ? 'text-primary' : 'text-[#1c1c25]' }}">Services</a>
             <a href="{{ route('training') }}" class="font-heading text-sm font-semibold uppercase tracking-wide {{ request()->routeIs('training') ? 'text-primary' : 'text-[#1c1c25]' }}">Training</a>
-            <a href="{{ url('/#blog') }}" class="font-heading text-sm font-semibold uppercase tracking-wide text-[#1c1c25]">Blog</a>
+            <a href="{{ route('blog') }}" class="font-heading text-sm font-semibold uppercase tracking-wide {{ request()->routeIs('blog') ? 'text-primary' : 'text-[#1c1c25]' }}">Blog</a>
             <a href="{{ route('contact-us') }}" class="font-heading text-sm font-semibold uppercase tracking-wide {{ request()->routeIs('contact-us') ? 'text-primary' : 'text-[#1c1c25]' }}">Contact Us</a>
         </div>
     </div>
