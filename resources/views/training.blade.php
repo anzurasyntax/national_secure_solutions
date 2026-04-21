@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('sections.header')
+    @include('sections.header', ['pageTitle' => 'Training'])
 
 <div class="max-w-[80%] mx-auto px-6 py-12">
 

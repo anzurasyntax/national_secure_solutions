@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('sections.header')
+    @include('sections.header', ['pageTitle' => 'About Us'])
     @include('sections.home.about')
 
 

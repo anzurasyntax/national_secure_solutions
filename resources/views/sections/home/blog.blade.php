@@ -1,4 +1,4 @@
-<section class="mx-auto max-w-[80%] pb-40 px-4 py-16">
+<section id="blog" class="mx-auto max-w-[80%] pb-40 px-4 py-16 scroll-mt-24">
     <!-- Header -->
     <div class="mb-12 text-center">
         <p class="font-heading text-sm font-semibold uppercase tracking-[3px] text-[#cc0000]">Our Blog</p>

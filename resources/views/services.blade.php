@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('sections.header')
+    @include('sections.header', ['pageTitle' => 'Services'])
     <section class="mx-auto max-w-[80%] px-6 py-12 md:px-12">
         <div class="mb-14 text-center">
             <p class="font-heading text-sm font-semibold uppercase tracking-[3px] text-primary">What We Do</p>

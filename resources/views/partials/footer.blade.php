@@ -28,7 +28,9 @@
                 <!-- Column 1: Logo + Description + Social -->
                 <div>
                     <div class="mb-6">
-                        <img src="{{ asset('img/logo.png') }}" alt="TransWorld Security Logo" class="h-[90px] w-auto object-contain">
+                        <a href="{{ route('home') }}" class="inline-block">
+                            <img src="{{ asset('img/logo.png') }}" alt="TransWorld Security Logo" class="h-[90px] w-auto object-contain">
+                        </a>
                     </div>
 
                     <p class="text-white/70 leading-[1.9] text-lg">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis us nostrud exercitation.</p>
@@ -55,37 +57,37 @@
                     <h3 class="font-heading text-[30px] font-bold text-white pb-4 border-b border-white/10 mb-5">Quick Links</h3>
                     <ul class="flex flex-col gap-[6px]">
                         <li>
-                            <a href="#" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
+                            <a href="{{ route('home') }}" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
                                 <svg class="w-10 h-10 text-primary fill-current shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
                                 Home
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
+                            <a href="{{ route('about') }}" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
                                 <svg class="w-10 h-10 text-primary fill-current shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
                                 About Us
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
+                            <a href="{{ route('services') }}" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
                                 <svg class="w-10 h-10 text-primary fill-current shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
                                 Services
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
+                            <a href="{{ route('training') }}" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
                                 <svg class="w-10 h-10 text-primary fill-current shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
                                 Training
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
+                            <a href="{{ url('/#blog') }}" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
                                 <svg class="w-10 h-10 text-primary fill-current shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
                                 Blogs
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
+                            <a href="{{ route('contact-us') }}" class="flex items-center gap-[10px] text-white/80 no-underline text-[22px] font-medium hover:text-primary transition-colors">
                                 <svg class="w-10 h-10 text-primary fill-current shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
                                 Contact Us
                             </a>

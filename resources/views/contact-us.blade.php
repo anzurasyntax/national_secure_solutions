@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('sections.header')
+    @include('sections.header', ['pageTitle' => 'Contact Us'])
 
     <!-- Heading -->
     <div class="text-center mb-10 pt-12">
