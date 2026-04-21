@@ -1,20 +1,39 @@
 @extends('layouts.admin')
 
-@section('title', 'Site & footer')
-
-@section('heading', 'Site & footer')
+@section('title', 'CMS')
+@section('heading', 'CMS')
 
 @section('content')
     <div class="space-y-8">
         <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
             <div class="border-l-4 border-primary bg-gradient-to-r from-ink to-[#111a35] px-6 py-6 text-white">
-                <h2 class="font-heading text-lg font-bold uppercase tracking-wide">Contact &amp; hours</h2>
-                <p class="mt-1 text-sm text-white/70">These values power the header bar and footer “Contact Us” area on the public site.</p>
+                <h2 class="font-heading text-lg font-bold uppercase tracking-wide">Brand</h2>
+                <p class="mt-1 text-sm text-white/70">Logo appears in the public site header, footer, and login screens. Recommended: PNG or SVG with transparent background.</p>
             </div>
 
-            <form method="POST" action="{{ route('admin.site-settings.update') }}" class="space-y-6 px-6 py-8">
+            <form method="POST" action="{{ route('admin.site-settings.update') }}" enctype="multipart/form-data" class="space-y-6 px-6 py-8">
                 @csrf
                 @method('PUT')
+
+                <div class="rounded-xl border border-gray-100 bg-[#fafbfc] p-6">
+                    <label class="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-600">Site logo</label>
+                    @if ($setting->logo_path)
+                        <div class="mb-4 flex flex-wrap items-center gap-4">
+                            <img src="{{ $setting->logoUrl() }}" alt="Current logo" class="max-h-20 w-auto rounded border border-gray-200 bg-white object-contain p-2">
+                            <label class="flex items-center gap-2 text-sm text-gray-700">
+                                <input type="checkbox" name="remove_logo" value="1" class="rounded border-gray-300 text-primary focus:ring-primary">
+                                Remove custom logo (revert to default)
+                            </label>
+                        </div>
+                    @endif
+                    <input type="file" name="logo" accept="image/*"
+                           class="block w-full text-sm text-gray-700 file:mr-4 file:rounded-lg file:border-0 file:bg-ink file:px-4 file:py-2 file:font-heading file:text-xs file:font-bold file:uppercase file:text-white hover:file:bg-[#111a35]">
+                    <p class="mt-2 text-xs text-gray-500">Max 5 MB. Leave empty to keep the current image unless you check “Remove” above.</p>
+                </div>
+
+                <div class="border-l-4 border-navy bg-gray-50 px-4 py-3 text-sm text-gray-700">
+                    <span class="font-semibold text-ink">Contact &amp; hours</span> — header bar and footer “Contact Us” area.
+                </div>
 
                 <div class="grid gap-6 lg:grid-cols-2">
                     <div>

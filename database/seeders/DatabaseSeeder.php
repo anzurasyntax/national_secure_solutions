@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             OurValueSeeder::class,
             TestimonialSeeder::class,
             AdminUserSeeder::class,
+            SampleCourseSeeder::class,
         ]);
     }
 }

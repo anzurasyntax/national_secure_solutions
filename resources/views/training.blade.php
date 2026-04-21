@@ -23,6 +23,9 @@
 
     <!-- Courses List -->
     <section class="mb-8">
+        <div class="mb-6 rounded-xl border border-gray-200 bg-gray-50 px-6 py-5">
+            <p class="text-lg font-semibold text-black">Structured online programmes with modules, checkout, and certificates are available on our <a href="{{ route('courses.index') }}" class="text-primary underline hover:no-underline">online courses page</a>.</p>
+        </div>
         <h2 class="text-4xl font-bold text-black mb-4">We also offer courses like:</h2>
         <ul class="list-disc list-inside space-y-2 text-lg text-black">
             <li>-Financial Security 101</li>

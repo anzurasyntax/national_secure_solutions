@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin login | Trans-World Security</title>
+    <title>Sign in | Trans-World Security</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,13 +26,13 @@
 </head>
 <body class="min-h-screen bg-gradient-to-br from-ink via-[#0f1730] to-[#1a1f6e] font-sans text-[#797979] flex flex-col items-center justify-center p-6">
     <a href="{{ url('/') }}" class="mb-8 inline-flex items-center gap-3 text-white/90 hover:text-white transition">
-        <img src="{{ asset('img/logo.png') }}" alt="Trans-World Security" class="h-12 w-auto brightness-0 invert">
+        <img src="{{ $siteSetting->logoUrl() }}" alt="{{ config('app.name') }}" class="h-12 w-auto max-w-[220px] object-contain {{ $siteSetting->usesDefaultLogo() ? 'brightness-0 invert' : '' }}">
     </a>
 
     <div class="w-full max-w-[440px] overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl">
         <div class="border-l-4 border-primary bg-gradient-to-r from-ink to-[#111a35] px-8 py-10 text-white">
-            <div class="font-heading text-2xl font-bold uppercase tracking-wide">Admin login</div>
-            <div class="mt-2 font-body text-sm text-white/70">Trans-World Security — secure access</div>
+            <div class="font-heading text-2xl font-bold uppercase tracking-wide">Student login</div>
+            <div class="mt-2 font-body text-sm text-white/70">Access your purchased courses under My learning. Staff use <a href="{{ url('/admin/login') }}" class="font-semibold text-white underline hover:no-underline">admin sign-in</a>.</div>
         </div>
 
         <div class="px-8 py-10">

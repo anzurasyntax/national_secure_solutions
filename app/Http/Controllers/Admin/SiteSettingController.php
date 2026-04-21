@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class SiteSettingController extends Controller
@@ -31,6 +34,8 @@ class SiteSettingController extends Controller
             'youtube_url' => ['nullable', 'string', 'max:2048'],
             'instagram_url' => ['nullable', 'string', 'max:2048'],
             'pinterest_url' => ['nullable', 'string', 'max:2048'],
+            'logo' => ['nullable', 'image', 'max:5120'],
+            'remove_logo' => ['sometimes', 'boolean'],
         ]);
 
         foreach (['facebook_url', 'x_url', 'youtube_url', 'instagram_url', 'pinterest_url'] as $field) {
@@ -38,7 +43,22 @@ class SiteSettingController extends Controller
             $validated[$field] = ($val === null || trim((string) $val) === '') ? null : trim((string) $val);
         }
 
+        unset($validated['logo'], $validated['remove_logo']);
+
         $existing = SiteSetting::query()->first();
+
+        if ($request->boolean('remove_logo')) {
+            if ($existing !== null && $existing->logo_path !== null && $existing->logo_path !== '') {
+                $this->deleteStoredLogo($existing->logo_path);
+            }
+            $validated['logo_path'] = null;
+        } elseif ($request->hasFile('logo')) {
+            $newPath = $this->storeLogo($request->file('logo'));
+            if ($existing !== null && $existing->logo_path !== null && $existing->logo_path !== '') {
+                $this->deleteStoredLogo($existing->logo_path);
+            }
+            $validated['logo_path'] = $newPath;
+        }
 
         if ($existing !== null) {
             $existing->update($validated);
@@ -50,6 +70,32 @@ class SiteSettingController extends Controller
 
         return redirect()
             ->route('admin.site-settings.edit')
-            ->with('status', 'Site details saved.');
+            ->with('status', 'CMS settings saved.');
+    }
+
+    private function storeLogo(UploadedFile $file): string
+    {
+        $dir = public_path('img/site');
+        if (! File::isDirectory($dir)) {
+            File::makeDirectory($dir, 0755, true);
+        }
+
+        $extension = strtolower($file->getClientOriginalExtension() ?: 'png');
+        $filename = 'logo-'.Str::lower(Str::random(12)).'.'.$extension;
+        $file->move($dir, $filename);
+
+        return 'img/site/'.$filename;
+    }
+
+    private function deleteStoredLogo(?string $path): void
+    {
+        if ($path === null || $path === '' || ! str_starts_with($path, 'img/site/')) {
+            return;
+        }
+
+        $full = public_path($path);
+        if (File::exists($full)) {
+            File::delete($full);
+        }
     }
 }

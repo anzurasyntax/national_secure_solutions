@@ -53,7 +53,7 @@
             <a href="{{ route('home') }}" class="shrink-0">
                 <div class="flex items-center gap-2">
                     <div class="leading-tight">
-                        <img src="{{ asset('img/logo.png') }}" class="w-52" alt="Trans-World Security">
+                        <img src="{{ $siteSetting->logoUrl() }}" class="h-16 w-auto max-w-[13rem] object-contain {{ $siteSetting->usesDefaultLogo() ? 'brightness-0 invert' : '' }}" alt="{{ config('app.name') }}">
                     </div>
                 </div>
             </a>
@@ -110,7 +110,7 @@
 <header class="sticky top-0 z-50 w-full border-t border-gray-200 border-b border-gray-200 bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]">
     <div class="mx-auto hidden max-w-[1170px] items-center justify-between gap-8 px-6 py-5 lg:flex">
         <a href="{{ route('home') }}" class="shrink-0">
-            <img src="{{ asset('img/logo.png') }}" class="h-12 w-auto sm:h-14" alt="Trans-World Security">
+            <img src="{{ $siteSetting->logoUrl() }}" class="h-12 w-auto max-w-[220px] object-contain sm:h-14" alt="{{ config('app.name') }}">
         </a>
 
         <nav class="flex flex-1 flex-wrap items-center justify-center gap-x-6 gap-y-2 xl:gap-x-10">
@@ -141,7 +141,7 @@
     {{-- Mobile inner --}}
     <div class="flex items-center justify-between gap-4 border-b border-gray-100 px-4 py-4 lg:hidden">
         <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-2">
-            <img src="{{ asset('img/logo.png') }}" class="h-10 w-auto" alt="Trans-World Security">
+            <img src="{{ $siteSetting->logoUrl() }}" class="h-10 w-auto max-w-[180px] object-contain" alt="{{ config('app.name') }}">
         </a>
         <button id="menuButtonInner" type="button" class="rounded-lg border border-gray-300 p-2 text-[#1c1c25]" aria-label="Toggle Menu">
             <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>

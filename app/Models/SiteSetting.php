@@ -16,6 +16,7 @@ class SiteSetting extends Model
         'youtube_url',
         'instagram_url',
         'pinterest_url',
+        'logo_path',
     ];
 
     /**
@@ -63,5 +64,25 @@ class SiteSetting extends Model
         $digits = preg_replace('/\D+/', '', (string) $this->phone);
 
         return $digits !== '' ? 'tel:'.$digits : '#';
+    }
+
+    /**
+     * Public URL for the site logo (CMS upload or bundled default).
+     */
+    public function logoUrl(): string
+    {
+        $path = $this->logo_path;
+
+        return ($path !== null && $path !== '')
+            ? asset($path)
+            : asset('img/logo.png');
+    }
+
+    /**
+     * Whether the header/footer use the default bundled logo (for CSS tweaks like invert on dark bars).
+     */
+    public function usesDefaultLogo(): bool
+    {
+        return $this->logo_path === null || $this->logo_path === '';
     }
 }
