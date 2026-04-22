@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'My learning | Trans-World Security')
+@section('title', 'My learning | National Secure Solutions')
 
 @section('content')
     @include('sections.header', ['pageTitle' => 'My learning'])
 
-    <div class="mx-auto max-w-[1170px] px-6 py-12">
+    <div class="mx-auto max-w-[90%] mb-28 px-6 py-12">
         @if (session('status'))
             <div class="mb-8 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-900">
                 {{ session('status') }}

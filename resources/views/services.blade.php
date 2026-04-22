@@ -2,7 +2,7 @@
 
 @section('content')
     @include('sections.header', ['pageTitle' => 'Services'])
-    <section class="mx-auto max-w-[80%] px-6 py-12 md:px-12">
+    <section class="mx-auto mb-28 max-w-[80%] px-6 py-12 md:px-12">
         <div class="mb-14 text-center">
             <p class="font-heading text-sm font-semibold uppercase tracking-[3px] text-primary">What We Do</p>
             <h1 class="font-heading text-[38px] font-bold text-[#1c1c25]">Our Services</h1>

@@ -5,7 +5,7 @@
 @section('content')
     @include('sections.header', ['pageTitle' => $course->title])
 
-    <div class="mx-auto max-w-[960px] px-6 py-12">
+    <div class="mx-auto mb-28 max-w-[80%] px-6 py-12">
         @if (session('status'))
             <div class="mb-8 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-900">
                 {{ session('status') }}

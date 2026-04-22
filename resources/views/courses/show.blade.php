@@ -5,7 +5,7 @@
 @section('content')
     @include('sections.header', ['pageTitle' => $course->title])
 
-    <div class="mx-auto max-w-[1170px] px-6 py-12">
+    <div class="mx-auto max-w-[90%] mb-28 px-6 py-12">
         <div class="grid gap-10 lg:grid-cols-12">
             <div class="lg:col-span-8">
                 @if ($course->image_path)

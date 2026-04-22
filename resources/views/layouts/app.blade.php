@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Trusted Security Service Phoenix, AZ | Trans-World Security')</title>
-    <meta name="description" content="@yield('meta_description', 'Trans-World Security Systems offers trained security guards and robust security equipment for homes, offices, and events. #1 security consultant in Phoenix, AZ.')">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
-
+    <title>@yield('title', 'Trusted Security Service Phoenix, AZ | National Secure Solutions')</title>
+    <meta name="description" content="@yield('meta_description', 'National Secure Solutions offers trained security guards and robust security equipment for homes, offices, and events. #1 security consultant in Phoenix, AZ.')">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,7 +17,7 @@
                     },
                     fontFamily: {
                         sans: ["Roboto", "sans-serif"],
-                        heading: ["Fira Sans", "sans-serif"]
+                        heading: ["Roboto", "sans-serif"]
                     }
                 }
             }
@@ -27,8 +25,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
         .fade-slide { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
@@ -115,8 +112,8 @@
                         ink: '#0b0f1e',
                     },
                     fontFamily: {
-                        heading: ['Oswald', 'sans-serif'],
-                        body: ['Open Sans', 'sans-serif'],
+                        heading: ['Roboto', 'sans-serif'],
+                        body: ['Roboto', 'sans-serif'],
                     },
                 }
             }

@@ -32,7 +32,7 @@ class HeroSlideSeeder extends Seeder
                 'image_path' => 'img/slider1.png',
                 'tagline' => null,
                 'headline' => 'SECURITY IS NOT THE MEANING OF LIFE, GREAT OPPORTUNITIES ARE WORTH THE RISK',
-                'subtitle' => 'Welcome to Trans-World Security Guards',
+                'subtitle' => 'Welcome to National Secure Solutions Guards',
                 'button_label' => 'Get Inquiry',
                 'button_url' => '#',
             ],

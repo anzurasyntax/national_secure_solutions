@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate verification | Trans-World Security</title>
+    <title>Certificate verification | National Secure Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-100 px-10 py-8 text-center text-sm text-gray-600">
-                This digital credential was issued by Trans-World Security School of Management and Security.
+                This digital credential was issued by National Secure Solutions School of Management and Security.
             </div>
         </div>
 

@@ -15,7 +15,7 @@
 
     <!-- SMS Welcome -->
     <section class="mb-8">
-        <h2 class="text-4xl font-bold text-black mb-3">Welcome to the School of Management and Security (SMS) at Trans-World Security!</h2>
+        <h2 class="text-4xl font-bold text-black mb-3">Welcome to the School of Management and Security (SMS) at National Secure Solutions!</h2>
         <p class="text-lg text-black leading-relaxed">
             At SMS, we offer cutting-edge programs tailored to people's unique needs and equip future security leaders with the skills and knowledge to excel in today's dynamic security landscape. Our curriculum is designed to provide students with a comprehensive understanding of security management practices, strategic planning, risk assessment, fraud prevention, and crisis management. With a focus on practical skills and hands-on experience, SMS prepares graduates to tackle the challenges of modern security environments effectively. Join us at SMS to embark on a rewarding journey toward a successful career in security management.
         </p>

@@ -20,7 +20,7 @@
         </div>
         <div class="rounded-2xl border border-gray-200 bg-gradient-to-br from-ink to-[#111a35] p-6 text-white shadow-sm sm:col-span-2 lg:col-span-1">
             <p class="font-heading text-xs font-bold uppercase tracking-[0.2em] text-white/60">Panel</p>
-            <p class="mt-2 font-heading text-lg font-bold">Trans-World Security</p>
+            <p class="mt-2 font-heading text-lg font-bold">National Secure Solutions</p>
             <p class="mt-2 text-sm text-white/75">Extend this area with CMS sections, inquiries, or user management when you are ready.</p>
         </div>
     </div>

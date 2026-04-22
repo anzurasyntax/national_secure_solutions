@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin') | Trans-World Security</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>@yield('title', 'Admin') | National Secure Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,15 +16,15 @@
                         ink: '#0b0f1e',
                     },
                     fontFamily: {
-                        sans: ['Open Sans', 'sans-serif'],
-                        heading: ['Oswald', 'sans-serif'],
+                        sans: ['Roboto', 'sans-serif'],
+                        heading: ['Roboto', 'sans-serif'],
                     },
                 },
             },
         };
     </script>
     <style>
-        body { font-family: "Open Sans", sans-serif; }
+        body { font-family: "Roboto", sans-serif; }
     </style>
     @stack('styles')
 </head>
@@ -209,7 +209,7 @@
             </div>
             <div class="hidden lg:block">
                 <h1 class="font-heading text-xl font-bold uppercase tracking-wide text-ink">@yield('heading', 'Dashboard')</h1>
-                <p class="text-sm text-gray-500">Trans-World Security — control panel</p>
+                <p class="text-sm text-gray-500">National Secure Solutions — control panel</p>
             </div>
             <div class="flex items-center gap-3">
                 <span class="hidden text-sm text-gray-600 sm:inline">{{ Auth::user()?->email }}</span>

@@ -5,7 +5,7 @@
 @section('content')
     @include('sections.header', ['pageTitle' => $module->title])
 
-    <div class="mx-auto max-w-[960px] px-6 py-12">
+    <div class="mx-auto mb-28 max-w-[80%] px-6 py-12">
         <p class="text-xs font-bold uppercase tracking-wide text-gray-500">
             <a href="{{ route('student.dashboard') }}" class="text-primary hover:underline">My learning</a>
             /

@@ -61,10 +61,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2 18l6-5M22 18l-6-5"/>
             </svg>
             <h3 class="text-3xl font-bold text-gray-900 mb-3">Email Address</h3>
-            <p class="text-gray-500 text-xl leading-relaxed mb-8">ona@transworldsecurity.net</p>
+            <p class="text-gray-500 text-xl leading-relaxed mb-8">info@nationalsecuresolutions.com</p>
             <!-- Button sits at the bottom edge -->
             <div class="translate-y-1/2 mt-auto">
-                <a href="mailto:ona@transworldsecurity.net"
+                <a href="mailto:info@nationalsecuresolutions.com"
                    class="bg-red-600 hover:bg-red-700 text-white text-sm font-bold tracking-widest uppercase px-8 py-3 rounded block transition">
                     MAIL US
                 </a>

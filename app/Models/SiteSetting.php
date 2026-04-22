@@ -26,7 +26,7 @@ class SiteSetting extends Model
     {
         return [
             'phone' => '773-319-6420',
-            'email' => 'ona@transworldsecurity.net',
+            'email' => 'info@nationalsecuresolutions.com',
             'location' => "5062 N 19th Ave Suite 103,\nPhoenix, AZ 85015, USA.",
             'working_time' => 'Mon to Fri: 08:00AM - 08:00PM',
             'facebook_url' => '#',

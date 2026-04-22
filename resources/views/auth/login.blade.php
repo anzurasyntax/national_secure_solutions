@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in | Trans-World Security</title>
+    <title>Sign in | National Secure Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,7 +32,7 @@
     <div class="w-full max-w-[440px] overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl">
         <div class="border-l-4 border-primary bg-gradient-to-r from-ink to-[#111a35] px-8 py-10 text-white">
             <div class="font-heading text-2xl font-bold uppercase tracking-wide">Student login</div>
-            <div class="mt-2 font-body text-sm text-white/70">Access your purchased courses under My learning. Staff use <a href="{{ url('/admin/login') }}" class="font-semibold text-white underline hover:no-underline">admin sign-in</a>.</div>
+            <div class="mt-2 font-body text-sm text-white/70">Access your purchased courses under My learning.</div>
         </div>
 
         <div class="px-8 py-10">

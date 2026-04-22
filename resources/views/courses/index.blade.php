@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Online Courses | Trans-World Security')
+@section('title', 'Online Courses | National Secure Solutions')
 
 @section('content')
     @include('sections.header', ['pageTitle' => 'Online Courses'])
 
-    <div class="mx-auto max-w-[1170px] px-6 py-12">
+    <div class="mx-auto max-w-[90%] mb-28 px-6 py-12">
         <div class="mb-10">
             <h1 class="font-heading text-4xl font-bold text-ink md:text-5xl">Online courses</h1>
             <p class="mt-3 max-w-3xl text-lg text-[#797979]">

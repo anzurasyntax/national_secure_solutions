@@ -1,6 +1,6 @@
 <section class="mx-auto grid max-w-[80%] h-screen grid-cols-1 items-center gap-12 px-4 py-16 lg:grid-cols-2">
     <div class="relative">
-        <img src="{{ asset($aboutPage->hero_image_path ?: 'img/about_us.jpg') }}" alt="Trans-world Security" class="w-full rounded object-cover shadow-lg">
+        <img src="{{ asset($aboutPage->hero_image_path ?: 'img/about_us.jpg') }}" alt="National Secure Solutions" class="w-full rounded object-cover shadow-lg">
     </div>
     <div>
         <h2 class="font-heading text-[43px] font-bold text-[#1c1c25]">{{ $aboutPage->brand_title }}</h2>
