@@ -85,8 +85,7 @@
     <div class="block border-b border-white/20 bg-black/45 xl:hidden">
         <div class="mx-auto flex h-[78px] max-w-[1170px] items-center justify-between px-4">
             <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-2">
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">T</div>
-                <span class="font-heading text-base font-bold text-white">NATIONAL SECURE SOLUTIONS</span>
+                <img src="{{ $siteSetting->logoUrl() }}" class="h-10 w-auto max-w-[180px] object-contain {{ $siteSetting->usesDefaultLogo() ? 'brightness-0 invert' : '' }}" alt="{{ config('app.name') }}">
             </a>
             <button id="menuButton" type="button" class="rounded border border-white/30 p-2" aria-label="Toggle Menu">
                 <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>

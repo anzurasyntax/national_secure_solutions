@@ -21,6 +21,36 @@
                 const dots = dotsSelector ? Array.from(document.querySelectorAll(dotsSelector)) : [];
                 if (!slides.length) return;
                 let index = 0;
+                let prevHovered = false;
+                let nextHovered = false;
+
+                function getSlidePreviewImage(targetIndex) {
+                    const slide = slides[(targetIndex + slides.length) % slides.length];
+                    const imageElement = slide.querySelector("[style*='background-image']");
+                    if (!imageElement) return "";
+
+                    const inlineStyle = imageElement.getAttribute("style") || "";
+                    const match = inlineStyle.match(/background-image:\s*url\(['"]?(.*?)['"]?\)/i);
+                    return match ? match[1] : "";
+                }
+
+                function setButtonPreview(button, targetIndex) {
+                    if (!button) return;
+                    const previewImage = getSlidePreviewImage(targetIndex);
+                    if (!previewImage) return;
+                    button.style.backgroundImage = "url('" + previewImage + "')";
+                    button.style.backgroundSize = "cover";
+                    button.style.backgroundPosition = "center";
+                    button.style.backgroundRepeat = "no-repeat";
+                }
+
+                function clearButtonPreview(button) {
+                    if (!button) return;
+                    button.style.backgroundImage = "";
+                    button.style.backgroundSize = "";
+                    button.style.backgroundPosition = "";
+                    button.style.backgroundRepeat = "";
+                }
 
                 function goTo(nextIndex) {
                     slides[index].classList.remove("active");
@@ -34,20 +64,44 @@
                         dots[index].classList.add("active");
                         dots[index].style.background = "#ee1a28";
                     }
+
+                    if (prevHovered) setButtonPreview(prevButton, index - 1);
+                    if (nextHovered) setButtonPreview(nextButton, index + 1);
                 }
 
                 setInterval(function () {
                     goTo(index + 1);
                 }, interval);
 
+                const prevButton = prevId ? document.getElementById(prevId) : null;
+                const nextButton = nextId ? document.getElementById(nextId) : null;
+
                 if (prevId) {
-                    const prevButton = document.getElementById(prevId);
                     if (prevButton) prevButton.addEventListener("click", function () { goTo(index - 1); });
+                    if (prevButton) {
+                        prevButton.addEventListener("mouseenter", function () {
+                            prevHovered = true;
+                            setButtonPreview(prevButton, index - 1);
+                        });
+                        prevButton.addEventListener("mouseleave", function () {
+                            prevHovered = false;
+                            clearButtonPreview(prevButton);
+                        });
+                    }
                 }
 
                 if (nextId) {
-                    const nextButton = document.getElementById(nextId);
                     if (nextButton) nextButton.addEventListener("click", function () { goTo(index + 1); });
+                    if (nextButton) {
+                        nextButton.addEventListener("mouseenter", function () {
+                            nextHovered = true;
+                            setButtonPreview(nextButton, index + 1);
+                        });
+                        nextButton.addEventListener("mouseleave", function () {
+                            nextHovered = false;
+                            clearButtonPreview(nextButton);
+                        });
+                    }
                 }
 
                 dots.forEach(function (dot, i) {

@@ -2,10 +2,10 @@
 
 @section('content')
     @include('sections.header', ['pageTitle' => 'Services'])
-    <section class="mx-auto mb-28 max-w-[80%] px-6 py-12 md:px-12">
+    <section class="mx-auto mb-20 max-w-[92%] px-4 py-10 sm:max-w-[88%] sm:px-6 sm:py-12 md:px-10 lg:mb-28 lg:max-w-[80%] lg:px-12">
         <div class="mb-14 text-center">
             <p class="font-heading text-sm font-semibold uppercase tracking-[3px] text-primary">What We Do</p>
-            <h1 class="font-heading text-[38px] font-bold text-[#1c1c25]">Our Services</h1>
+            <h1 class="font-heading text-3xl font-bold text-[#1c1c25] sm:text-[38px]">Our Services</h1>
             <span class="mx-auto mt-4 block h-[4px] w-14 rounded-xl bg-primary"></span>
         </div>
 

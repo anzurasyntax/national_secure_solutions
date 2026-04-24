@@ -1,9 +1,9 @@
-<section id="services" class="mx-auto max-w-[80%] px-24 py-16">
+<section id="services" class="mx-auto max-w-[92%] px-4 py-14 sm:max-w-[88%] sm:px-6 lg:max-w-[80%] lg:px-24 lg:py-16">
 
     <!-- Header -->
     <div class="mb-14 text-center">
         <p class="font-heading text-sm font-semibold uppercase tracking-[3px] text-primary">What We Do</p>
-        <h2 class="font-heading text-[38px] font-bold text-[#1c1c25]">Our Services</h2>
+        <h2 class="font-heading text-3xl font-bold text-[#1c1c25] sm:text-[38px]">Our Services</h2>
         <span class="mx-auto mt-4 block h-[4px] w-14 rounded-xl bg-primary"></span>
     </div>
 

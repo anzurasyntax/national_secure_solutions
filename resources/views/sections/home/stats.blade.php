@@ -10,7 +10,7 @@
 
             @forelse ($homeStats as $stat)
                 <article class="flex flex-col items-center justify-center py-8 px-6 text-center {{ ! $loop->last ? 'relative' : '' }}">
-                    <h3 class="text-[52px] font-extrabold leading-tight tracking-tight">
+                    <h3 class="text-4xl font-extrabold leading-tight tracking-tight sm:text-[52px]">
                         <span data-counter="{{ $stat->value }}">0</span>{{ $stat->suffix }}
                     </h3>
                     <p class="mt-2 text-[13px] font-bold uppercase tracking-[2px] text-gray-300">{{ $stat->heading }}</p>

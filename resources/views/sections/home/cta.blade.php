@@ -11,7 +11,7 @@
     <div class="relative z-10 mx-auto flex max-w-[1170px] flex-col items-start justify-between gap-8 px-4 lg:flex-row lg:items-center">
 
         <div class="max-w-3xl">
-            <h2 class="font-heading text-[32px] font-extrabold uppercase leading-tight tracking-wide">
+            <h2 class="font-heading text-2xl font-extrabold uppercase leading-tight tracking-wide sm:text-[32px]">
                 {{ $cta->headline }}
             </h2>
             <p class="mt-4 text-[13px] font-bold uppercase tracking-[1.5px] text-white/70">
@@ -20,7 +20,7 @@
         </div>
 
         <a href="{{ $cta->button_url }}"
-           class="shrink-0 border-2 border-primary px-10 py-4 font-heading text-sm font-bold uppercase tracking-[2px] text-white transition-all duration-300 hover:bg-primary">
+           class="w-full border-2 border-primary px-6 py-3 text-center font-heading text-xs font-bold uppercase tracking-[2px] text-white transition-all duration-300 hover:bg-primary sm:w-auto sm:shrink-0 sm:px-10 sm:py-4 sm:text-sm">
             {{ $cta->button_label }}
         </a>
 

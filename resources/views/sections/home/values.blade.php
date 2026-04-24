@@ -4,11 +4,11 @@
     $pages = $count > 0 ? (int) ceil($count / 3) : 0;
 @endphp
 
-<section class="mx-auto max-w-[80%] px-4 py-16">
+<section class="mx-auto max-w-[92%] px-4 py-14 sm:max-w-[88%] lg:max-w-[80%] lg:py-16">
 
     <div class="mb-10 text-center">
         <p class="font-heading text-sm font-semibold uppercase tracking-[3px] text-primary">Values</p>
-        <h2 class="font-heading text-[38px] font-bold text-[#1c1c25]">OUR VALUES</h2>
+        <h2 class="font-heading text-3xl font-bold text-[#1c1c25] sm:text-[38px]">OUR VALUES</h2>
         <span class="mx-auto mt-4 block h-[3px] w-16 bg-primary"></span>
     </div>
 
@@ -18,22 +18,22 @@
         <div id="values-slider-viewport" class="relative overflow-hidden">
             <div id="values-track" class="flex gap-6 transition-transform duration-500 ease-in-out">
                 @foreach ($items as $v)
-                    <article class="group relative min-w-[calc(33.333%-1rem)] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl">
+                    <article class="group relative min-w-full flex-shrink-0 cursor-pointer overflow-hidden rounded-xl md:min-w-[calc(50%-0.75rem)] lg:min-w-[calc(33.333%-1rem)]">
                         <img src="{{ $v->imageSrc() }}"
                              alt="{{ $v->line1 }}"
-                             class="h-[300px] w-full object-cover transition-transform duration-500 group-hover:scale-105">
+                             class="h-[260px] w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-[300px]">
                         <div class="absolute inset-0 bg-black/55 backdrop-blur-[1px] transition-all duration-400 group-hover:bg-black/75 group-hover:backdrop-blur-0"></div>
                         <div class="absolute left-5 top-5 flex gap-2">
-                            <span class="flex h-14 w-14 items-center justify-center rounded-md bg-primary text-white">
+                            <span class="flex h-12 w-12 items-center justify-center rounded-md bg-primary text-white sm:h-14 sm:w-14">
                                 <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
                             </span>
-                            <span class="flex h-14 w-14 items-center justify-center rounded-md bg-primary text-white">
+                            <span class="flex h-12 w-12 items-center justify-center rounded-md bg-primary text-white sm:h-14 sm:w-14">
                                 <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                             </span>
                         </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <p class="mb-1 text-lg font-bold uppercase tracking-[2px] text-white/70">{{ $v->eyebrow }}</p>
-                            <h3 class="font-heading text-[28px] font-bold leading-snug text-white">{{ $v->line1 }}<br>{{ $v->line2 }}</h3>
+                        <div class="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                            <p class="mb-1 text-sm font-bold uppercase tracking-[2px] text-white/70 sm:text-lg">{{ $v->eyebrow }}</p>
+                            <h3 class="font-heading text-2xl font-bold leading-snug text-white sm:text-[28px]">{{ $v->line1 }}<br>{{ $v->line2 }}</h3>
                         </div>
                     </article>
                 @endforeach
