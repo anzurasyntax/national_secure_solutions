@@ -25,19 +25,25 @@
     </script>
     <style>
         body { font-family: "Roboto", sans-serif; }
+        body.admin-mobile-nav-open { overflow: hidden; }
     </style>
     @stack('styles')
 </head>
 <body class="min-h-screen bg-[#f4f6f9] font-sans text-[#797979]">
 <div class="flex min-h-screen">
-    <aside class="hidden w-64 shrink-0 flex-col border-r border-white/10 bg-gradient-to-b from-ink to-[#111a35] text-white lg:flex">
-        <div class="border-b border-white/10 px-6 py-6">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
-                <img src="{{ $siteSetting->logoUrl() }}" alt="{{ config('app.name') }}" class="h-10 w-auto max-w-[200px] object-contain {{ $siteSetting->usesDefaultLogo() ? 'brightness-0 invert' : '' }}">
-            </a>
-            <p class="mt-3 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Admin</p>
+    <aside id="admin-sidebar" class="fixed inset-y-0 left-0 z-50 flex h-screen w-64 max-w-[min(20rem,calc(100vw-1rem))] -translate-x-full flex-col border-r border-white/10 bg-gradient-to-b from-ink to-[#111a35] text-white transition-transform duration-200 ease-out shadow-xl shadow-ink/20 lg:static lg:z-0 lg:h-auto lg:max-w-none lg:shrink-0 lg:translate-x-0 lg:shadow-none" aria-label="Main navigation">
+        <div class="flex shrink-0 items-start justify-between gap-3 border-b border-white/10 px-4 py-4 sm:px-6 sm:py-6">
+            <div class="min-w-0">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
+                    <img src="{{ $siteSetting->logoUrl() }}" alt="{{ config('app.name') }}" class="h-8 w-auto max-w-[200px] object-contain sm:h-10 {{ $siteSetting->usesDefaultLogo() ? 'brightness-0 invert' : '' }}">
+                </a>
+                <p class="mt-2 font-heading text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Admin</p>
+            </div>
+            <button type="button" id="admin-nav-close" class="rounded-lg p-2 text-white/80 transition hover:bg-white/10 hover:text-white lg:hidden" aria-label="Close menu">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
         </div>
-        <nav class="flex-1 space-y-1 px-3 py-4">
+        <nav class="min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-y-contain px-3 py-4">
             <a href="{{ route('admin.dashboard') }}"
                class="{{ request()->routeIs('admin.dashboard') ? 'bg-white/10 text-white' : 'text-white/75 hover:bg-white/5 hover:text-white' }} flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition">
                 <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary/90 text-white" aria-hidden="true">
@@ -188,51 +194,126 @@
         </div>
     </aside>
 
-    <div class="flex min-h-screen flex-1 flex-col">
-        <header class="sticky top-0 z-40 flex items-center justify-between gap-4 border-b border-gray-200 bg-white px-4 py-4 shadow-sm lg:px-8">
-            <div class="flex flex-wrap items-center gap-2 lg:hidden">
-                <span class="font-heading text-lg font-bold uppercase tracking-wide text-ink">Admin</span>
-                <a href="{{ route('admin.dashboard') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Dashboard</a>
-                <a href="{{ route('admin.hero-slides.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Hero</a>
-                <a href="{{ route('admin.home-features.edit') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Features</a>
-                <a href="{{ route('admin.home-stats.edit') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Stats</a>
-                <a href="{{ route('admin.home-cta.edit') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">CTA</a>
-                <a href="{{ route('admin.why-choose-us.edit') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Why Us</a>
-                <a href="{{ route('admin.site-settings.edit') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">CMS</a>
-                <a href="{{ route('admin.about-page.edit') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">About</a>
-                <a href="{{ route('admin.services.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Services</a>
-                <a href="{{ route('admin.our-values.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Values</a>
-                <a href="{{ route('admin.testimonials.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Reviews</a>
-                <a href="{{ route('admin.courses.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Courses</a>
-                <a href="{{ route('admin.course-orders.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Orders</a>
-                <a href="{{ route('admin.blog-posts.index') }}" class="rounded-md border border-gray-200 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50">Blog</a>
+    <div class="flex min-h-0 min-w-0 flex-1 flex-col">
+        <header class="sticky top-0 z-30 flex items-center justify-between gap-2 border-b border-gray-200 bg-white px-3 py-3 shadow-sm sm:gap-3 sm:px-4 sm:py-4 lg:px-8">
+            <div class="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
+                <button type="button" id="admin-nav-open" class="inline-flex shrink-0 items-center justify-center rounded-lg border border-gray-200 p-2 text-ink transition hover:bg-gray-50 lg:hidden" aria-label="Open menu" aria-controls="admin-sidebar" aria-expanded="false">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+                </button>
+                <div class="min-w-0 pr-1">
+                    <h1 class="truncate font-heading text-base font-bold uppercase tracking-wide text-ink sm:text-lg lg:text-xl">@yield('heading', 'Dashboard')</h1>
+                    <p class="mt-0.5 hidden text-sm text-gray-500 sm:block">National Secure Solutions — control panel</p>
+                </div>
             </div>
-            <div class="hidden lg:block">
-                <h1 class="font-heading text-xl font-bold uppercase tracking-wide text-ink">@yield('heading', 'Dashboard')</h1>
-                <p class="text-sm text-gray-500">National Secure Solutions — control panel</p>
-            </div>
-            <div class="flex items-center gap-3">
-                <span class="hidden text-sm text-gray-600 sm:inline">{{ Auth::user()?->email }}</span>
-                <a href="{{ url('/') }}" class="hidden rounded-lg border border-gray-200 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-ink hover:bg-gray-50 sm:inline-block">
+            <div class="flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
+                <span class="hidden min-w-0 max-w-[9rem] truncate text-xs text-gray-600 sm:inline sm:max-w-[12rem] md:max-w-none md:text-sm">{{ Auth::user()?->email }}</span>
+                <a href="{{ url('/') }}" class="inline-flex shrink-0 items-center justify-center rounded-lg border border-gray-200 px-2.5 py-2 text-xs font-semibold uppercase tracking-wide text-ink transition hover:bg-gray-50 sm:px-3">
                     Site
                 </a>
-                <form method="POST" action="{{ route('admin.logout') }}" class="inline">
+                <form method="POST" action="{{ route('admin.logout') }}" class="inline shrink-0">
                     @csrf
-                    <button type="submit" class="rounded-lg bg-primary px-4 py-2 font-heading text-xs font-bold uppercase tracking-[0.15em] text-white hover:bg-red-700">
+                    <button type="submit" class="whitespace-nowrap rounded-lg bg-primary px-2.5 py-2 font-heading text-xs font-bold uppercase tracking-wider text-white sm:px-4 sm:tracking-[0.15em]">
                         Log out
                     </button>
                 </form>
             </div>
         </header>
 
-        <main class="flex-1 p-4 lg:p-8">
-            <div class="mx-auto max-w-6xl space-y-6">
-                @include('admin.partials.flash')
-                @yield('content')
-            </div>
-        </main>
+        <div class="relative z-0 flex min-h-0 min-w-0 flex-1 flex-col">
+            <div id="admin-mobile-backdrop" class="invisible absolute inset-0 z-20 cursor-pointer bg-ink/50 opacity-0 transition-opacity duration-200 ease-out pointer-events-none lg:hidden" aria-hidden="true"></div>
+            <main class="relative z-0 min-w-0 flex-1 p-3 sm:p-4 lg:p-8">
+                <div class="mx-auto max-w-6xl space-y-4 sm:space-y-6">
+                    @include('admin.partials.flash')
+                    @yield('content')
+                </div>
+            </main>
+        </div>
     </div>
 </div>
+<script>
+(function () {
+    var openBtn = document.getElementById('admin-nav-open');
+    var closeBtn = document.getElementById('admin-nav-close');
+    var sidebar = document.getElementById('admin-sidebar');
+    var backdrop = document.getElementById('admin-mobile-backdrop');
+    if (!sidebar) return;
+    var mqLg = typeof window.matchMedia === 'function' && window.matchMedia('(min-width: 1024px)');
+
+    function isDesktop() {
+        return mqLg && mqLg.matches;
+    }
+    function openNav() {
+        if (isDesktop()) return;
+        document.body.classList.add('admin-mobile-nav-open');
+        if (backdrop) {
+            backdrop.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+            backdrop.setAttribute('aria-hidden', 'false');
+        }
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.setAttribute('aria-hidden', 'false');
+        if (openBtn) openBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closeNav() {
+        if (isDesktop()) {
+            if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+            return;
+        }
+        document.body.classList.remove('admin-mobile-nav-open');
+        if (backdrop) {
+            backdrop.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+            backdrop.setAttribute('aria-hidden', 'true');
+        }
+        sidebar.classList.add('-translate-x-full');
+        sidebar.setAttribute('aria-hidden', 'true');
+        if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+    }
+    if (isDesktop()) {
+        sidebar.setAttribute('aria-hidden', 'false');
+    } else {
+        sidebar.setAttribute('aria-hidden', 'true');
+    }
+    if (openBtn) {
+        openBtn.addEventListener('click', function () { openNav(); });
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function () { closeNav(); });
+    }
+    if (backdrop) {
+        backdrop.addEventListener('click', function () { closeNav(); });
+    }
+    sidebar.addEventListener('click', function (e) {
+        if (isDesktop() || !e.target || !e.target.closest) return;
+        if (e.target.closest('a[href]')) {
+            closeNav();
+        }
+    });
+    if (typeof window.matchMedia === 'function') {
+        var mq = window.matchMedia('(min-width: 1024px)');
+        var onMq = function (e) {
+            if (e.matches) {
+                document.body.classList.remove('admin-mobile-nav-open');
+                if (backdrop) {
+                    backdrop.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+                }
+                sidebar.setAttribute('aria-hidden', 'false');
+                if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                sidebar.setAttribute('aria-hidden', sidebar.classList.contains('-translate-x-full') ? 'true' : 'false');
+            }
+        };
+        if (typeof mq.addEventListener === 'function') {
+            mq.addEventListener('change', onMq);
+        } else if (typeof mq.addListener === 'function') {
+            mq.addListener(onMq);
+        }
+    }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !isDesktop() && !sidebar.classList.contains('-translate-x-full')) {
+            closeNav();
+        }
+    });
+})();
+</script>
 @stack('scripts')
 </body>
 </html>

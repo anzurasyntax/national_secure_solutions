@@ -7,6 +7,7 @@
     <p class="text-sm text-gray-600">Payments created from the public checkout flow (fake gateway or future card processor).</p>
 
     <div class="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200 text-sm">
             <thead class="bg-gray-50 text-left text-xs font-bold uppercase tracking-wide text-gray-600">
                 <tr>
@@ -42,6 +43,7 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
     </div>
 
     <div class="mt-6">
