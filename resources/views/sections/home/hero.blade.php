@@ -34,8 +34,8 @@
             @endforelse
 
             @if ($heroSlides->isNotEmpty())
-                {{-- Arrows inside a 90% wide centered wrapper --}}
-                <div class="pointer-events-none absolute inset-x-0 top-1/2 z-20 w-[94%] -translate-y-1/2 sm:w-[82%] lg:w-[70%]" style="left:50%;transform:translateX(-50%) translateY(-50%);">
+                {{-- Arrows pushed toward screen edges to avoid text overlap --}}
+                <div class="pointer-events-none absolute inset-x-0 top-1/2 z-20 w-[94%] -translate-y-1/2 sm:w-[86%] lg:w-[82%]" style="left:50%;transform:translateX(-50%) translateY(-50%);">
                     <button id="heroPrev" type="button" aria-label="Previous slide" class="pointer-events-auto absolute left-0 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[#f8b7b7]/70 text-white transition hover:bg-primary sm:h-14 sm:w-14 lg:h-20 lg:w-20">
                         <svg class="h-5 w-5 sm:h-7 sm:w-7 lg:h-10 lg:w-10" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
