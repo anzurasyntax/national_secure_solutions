@@ -53,7 +53,7 @@
             <a href="{{ route('home') }}" class="shrink-0">
                 <div class="flex items-center gap-2">
                     <div class="leading-tight">
-                        <img src="{{ $siteSetting->logoUrl() }}" class="h-16 w-auto max-w-[13rem] object-contain {{ $siteSetting->usesDefaultLogo() ? 'brightness-0 invert' : '' }}" alt="{{ config('app.name') }}">
+                        <img src="{{ $siteSetting->logoUrl() }}" class="h-24 w-auto max-w-[13rem] object-contain {{ $siteSetting->usesDefaultLogo() ? 'brightness-0 invert' : '' }}" alt="{{ config('app.name') }}">
                     </div>
                 </div>
             </a>
