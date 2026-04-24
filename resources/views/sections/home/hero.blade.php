@@ -17,7 +17,7 @@
                     @else
                         {{-- Centered slide with H2 + subtitle --}}
                         <div class="absolute top-1/2 w-[92%] -translate-y-1/2 px-4 text-white sm:w-[80%] sm:px-0 lg:w-[60%]" style="left:50%;transform:translateX(-50%) translateY(-50%);">
-                            <h2 class="max-w-3xl font-heading text-2xl font-bold uppercase leading-tight sm:text-4xl lg:text-[47px] lg:leading-[1.15]">{{ $slide->headline }}</h2>
+                            <h2 class="max-w-3xl font-heading text-2xl font-bold uppercase leading-tight sm:text-4xl lg:text-[40px] lg:leading-[1.15]">{{ $slide->headline }}</h2>
                             @if ($slide->subtitle)
                                 <p class="mt-3 font-heading text-base font-bold text-primary sm:mt-5 sm:text-xl">{{ $slide->subtitle }}</p>
                             @endif

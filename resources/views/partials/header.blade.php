@@ -14,8 +14,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-[16px] text-white">If your any query:</p>
-                        <p class="text-[16px] font-bold text-white">
+                        <p class="text-[15px] text-white">If your any query:</p>
+                        <p class="text-[15px] font-bold text-white">
                             <a href="mailto:{{ $siteSetting->email }}" class="transition-colors hover:text-primary">{{ $siteSetting->email }}</a>
                         </p>
                     </div>
@@ -31,8 +31,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-[16px] text-white">Have any question?</p>
-                        <p class="text-[16px] font-bold text-white">
+                        <p class="text-[15px] text-white">Have any question?</p>
+                        <p class="text-[15px] font-bold text-white">
                             <a href="{{ $siteSetting->telHref() }}" class="transition-colors hover:text-primary">{{ $siteSetting->phone }}</a>
                         </p>
                     </div>
@@ -41,7 +41,7 @@
                 <div class="flex-1"></div>
 
                 <!-- Hours -->
-                <p class="whitespace-nowrap text-[16px] text-white">{{ $siteSetting->working_time }}</p>
+                <p class="whitespace-nowrap text-[15px] text-white">{{ $siteSetting->working_time }}</p>
 
                 <!-- Button -->
                 <a href="{{ route('contact-us') }}" class="rounded bg-[#cc2222] px-3 py-3 text-[17px] font-bold uppercase tracking-wide text-white transition hover:bg-[#a81b1b]">
@@ -49,7 +49,7 @@
                 </a>
             </div>
         </div>
-        <div class="mt-7 flex h-[76px] items-center justify-between px-12 py-7">
+        <div class="mt-2 flex h-[76px] items-center justify-between px-12 py-7">
             <a href="{{ route('home') }}" class="shrink-0">
                 <div class="flex items-center gap-2">
                     <div class="leading-tight">
@@ -113,12 +113,12 @@
         </a>
 
         <nav class="flex flex-1 flex-wrap items-center justify-center gap-x-6 gap-y-2 xl:gap-x-10">
-            <a href="{{ route('home') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[16px] {{ request()->routeIs('home') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Home</a>
-            <a href="{{ route('about') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[16px] {{ request()->routeIs('about') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">About Us</a>
-            <a href="{{ route('services') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[16px] {{ request()->routeIs('services') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Services</a>
-            <a href="{{ route('training') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[16px] {{ request()->routeIs('training') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Training</a>
-            <a href="{{ route('blog') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[16px] {{ request()->routeIs('blog') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Blog</a>
-            <a href="{{ route('contact-us') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[16px] {{ request()->routeIs('contact-us') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Contact Us</a>
+            <a href="{{ route('home') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[15px] {{ request()->routeIs('home') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Home</a>
+            <a href="{{ route('about') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[15px] {{ request()->routeIs('about') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">About Us</a>
+            <a href="{{ route('services') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[15px] {{ request()->routeIs('services') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Services</a>
+            <a href="{{ route('training') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[15px] {{ request()->routeIs('training') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Training</a>
+            <a href="{{ route('blog') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[15px] {{ request()->routeIs('blog') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Blog</a>
+            <a href="{{ route('contact-us') }}" class="nav-link-inner font-heading text-[17px] font-semibold xl:text-[15px] {{ request()->routeIs('contact-us') ? 'text-primary' : 'text-[#1c1c25]' }} transition-colors hover:text-primary">Contact Us</a>
         </nav>
 
         <div class="flex shrink-0 items-center gap-2">
