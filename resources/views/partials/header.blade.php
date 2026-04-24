@@ -14,8 +14,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-[18px] text-white">If your any query:</p>
-                        <p class="text-[18px] font-bold text-white">
+                        <p class="text-[16px] text-white">If your any query:</p>
+                        <p class="text-[16px] font-bold text-white">
                             <a href="mailto:{{ $siteSetting->email }}" class="transition-colors hover:text-primary">{{ $siteSetting->email }}</a>
                         </p>
                     </div>
@@ -31,8 +31,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-[18px] text-white">Have any question?</p>
-                        <p class="text-[18px] font-bold text-white">
+                        <p class="text-[16px] text-white">Have any question?</p>
+                        <p class="text-[16px] font-bold text-white">
                             <a href="{{ $siteSetting->telHref() }}" class="transition-colors hover:text-primary">{{ $siteSetting->phone }}</a>
                         </p>
                     </div>
@@ -41,7 +41,7 @@
                 <div class="flex-1"></div>
 
                 <!-- Hours -->
-                <p class="whitespace-nowrap text-[18px] text-white">{{ $siteSetting->working_time }}</p>
+                <p class="whitespace-nowrap text-[16px] text-white">{{ $siteSetting->working_time }}</p>
 
                 <!-- Button -->
                 <a href="{{ route('contact-us') }}" class="rounded bg-[#cc2222] px-3 py-3 text-[17px] font-bold uppercase tracking-wide text-white transition hover:bg-[#a81b1b]">
