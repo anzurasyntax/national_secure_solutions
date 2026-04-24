@@ -44,7 +44,7 @@
                 <p class="whitespace-nowrap text-[18px] text-white">{{ $siteSetting->working_time }}</p>
 
                 <!-- Button -->
-                <a href="{{ route('contact-us') }}" class="rounded bg-[#cc2222] px-3 py-3 text-[20px] font-extrabold uppercase tracking-wide text-white transition hover:bg-[#a81b1b]">
+                <a href="{{ route('contact-us') }}" class="rounded bg-[#cc2222] px-3 py-3 text-[17px] font-bold uppercase tracking-wide text-white transition hover:bg-[#a81b1b]">
                     Contact Us
                 </a>
             </div>
