@@ -109,7 +109,7 @@
 <header class="sticky top-0 z-50 w-full border-t border-gray-200 border-b border-gray-200 bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]">
     <div class="mx-auto hidden max-w-[1170px] items-center justify-between gap-8 px-6 lg:flex">
         <a href="{{ route('home') }}" class="shrink-0">
-            <img src="{{ $siteSetting->logoUrl() }}" class="h-[6.5rem] w-auto max-w-[220px] object-contain sm:h-14" alt="{{ config('app.name') }}">
+            <img src="{{ $siteSetting->logoUrl() }}" class="h-12 w-auto max-w-[220px] object-contain sm:h-[6.5rem]" alt="{{ config('app.name') }}">
         </a>
 
         <nav class="flex flex-1 flex-wrap items-center justify-center gap-x-6 gap-y-2 xl:gap-x-10">
