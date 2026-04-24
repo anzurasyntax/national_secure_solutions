@@ -54,7 +54,7 @@
                                 <img src="{{ asset('img/testimonial.png') }}" alt="" style="opacity: 0.2;">
                             </div>
 
-                            <p class="mx-auto max-w-3xl text-base leading-8 text-gray-500 sm:text-lg sm:leading-9 lg:text-[20px] lg:leading-[1.9]">
+                            <p class="mx-auto max-w-3xl text-base leading-8 text-gray-500 sm:text-lg sm:leading-9 lg:text-[17px] lg:leading-[1.9]">
                                 {{ $t->body }}
                             </p>
                             <div class="mt-6 flex justify-center gap-1 text-3xl text-yellow-400 sm:text-4xl" aria-hidden="true">

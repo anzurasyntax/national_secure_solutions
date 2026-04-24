@@ -50,12 +50,6 @@
         body {
             font-family: "Roboto", sans-serif;
         }
-        @media (min-width: 1024px) {
-            html {
-                /* Scale desktop typography down (e.g., ~18px -> ~15px). */
-                font-size: 83.3333%;
-            }
-        }
         .nav-link:hover::after { width: 100%; }
         .nav-link-inner { position: relative; }
         .nav-link-inner::after {

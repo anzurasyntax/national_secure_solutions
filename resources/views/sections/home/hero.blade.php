@@ -10,14 +10,14 @@
                     @if ($slide->tagline)
                         {{-- Slide layout with tagline + H1 (matches original slide 1) --}}
                         <div class="absolute inset-x-0 top-1/2 mx-auto w-[92%] -translate-y-[20%] px-4 text-white sm:w-[80%] sm:px-0 lg:w-[60%]" style="left:50%;transform:translateX(-50%) translateY(-20%);">
-                            <p class="mb-3 font-heading text-sm font-bold uppercase leading-none tracking-[0.14em] text-primary sm:mb-4 sm:text-[20px] sm:tracking-widest lg:text-[28px]">{{ $slide->tagline }}</p>
-                            <h1 class="max-w-[780px] font-heading text-2xl font-bold uppercase leading-tight sm:text-4xl lg:text-[50px] lg:leading-[1.15]">{{ $slide->headline }}</h1>
+                            <p class="mb-3 font-heading text-sm font-bold uppercase leading-none tracking-[0.14em] text-primary sm:mb-4 sm:text-[20px] sm:tracking-widest lg:text-[25px]">{{ $slide->tagline }}</p>
+                            <h1 class="max-w-[780px] font-heading text-2xl font-bold uppercase leading-tight sm:text-4xl lg:text-[47px] lg:leading-[1.15]">{{ $slide->headline }}</h1>
                             <a href="{{ $slide->button_url ?: '#' }}" class="mt-5 inline-block bg-primary px-5 py-3 font-heading text-xs font-bold uppercase tracking-wide text-white transition hover:bg-red-700 sm:mt-8 sm:px-8 sm:py-4 sm:text-sm">{{ $slide->button_label }}</a>
                         </div>
                     @else
                         {{-- Centered slide with H2 + subtitle --}}
                         <div class="absolute top-1/2 w-[92%] -translate-y-1/2 px-4 text-white sm:w-[80%] sm:px-0 lg:w-[60%]" style="left:50%;transform:translateX(-50%) translateY(-50%);">
-                            <h2 class="max-w-3xl font-heading text-2xl font-bold uppercase leading-tight sm:text-4xl lg:text-[50px] lg:leading-[1.15]">{{ $slide->headline }}</h2>
+                            <h2 class="max-w-3xl font-heading text-2xl font-bold uppercase leading-tight sm:text-4xl lg:text-[47px] lg:leading-[1.15]">{{ $slide->headline }}</h2>
                             @if ($slide->subtitle)
                                 <p class="mt-3 font-heading text-base font-bold text-primary sm:mt-5 sm:text-xl">{{ $slide->subtitle }}</p>
                             @endif
