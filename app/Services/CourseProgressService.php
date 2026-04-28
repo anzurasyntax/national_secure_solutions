@@ -15,9 +15,9 @@ class CourseProgressService
         private readonly CertificateService $certificateService,
     ) {}
 
-    public function markModuleComplete(User $user, CourseModule $module): void
+    public function markModuleComplete(User $user, CourseModule $module): bool
     {
-        DB::transaction(function () use ($user, $module): void {
+        return DB::transaction(function () use ($user, $module): bool {
             CourseModuleProgress::query()->firstOrCreate(
                 [
                     'user_id' => $user->id,
@@ -26,7 +26,7 @@ class CourseProgressService
                 ['completed_at' => now()]
             );
 
-            $this->maybeIssueCertificate($user, $module->course);
+            return $this->maybeIssueCertificate($user, $module->course);
         });
     }
 
@@ -54,16 +54,18 @@ class CourseProgressService
         return $done >= $total;
     }
 
-    protected function maybeIssueCertificate(User $user, Course $course): void
+    protected function maybeIssueCertificate(User $user, Course $course): bool
     {
         if (! $this->hasCompletedCourse($user, $course)) {
-            return;
+            return false;
         }
 
         if (Certificate::query()->where('user_id', $user->id)->where('course_id', $course->id)->exists()) {
-            return;
+            return false;
         }
 
         $this->certificateService->issue($user, $course);
+
+        return true;
     }
 }

@@ -3,7 +3,7 @@
     <div id="student-sidebar-backdrop" class="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm transition lg:hidden hidden" aria-hidden="true"></div>
 
     <aside id="student-sidebar-panel"
-           class="fixed inset-y-0 left-0 z-50 flex w-64 -translate-x-full flex-col border-r border-slate-200 bg-white shadow-xl transition-transform duration-200 lg:translate-x-0 lg:shadow-none">
+           class="fixed inset-y-0 left-0 z-50 flex w-64 -translate-x-full flex-col border-r border-slate-200 bg-white shadow-xl transition-transform duration-200 lg:relative lg:inset-auto lg:z-auto lg:h-auto lg:w-full lg:translate-x-0 lg:rounded-2xl lg:border lg:border-slate-200 lg:shadow-sm">
         <div class="flex h-16 items-center border-b border-slate-100 px-4">
             <a href="{{ route('student.dashboard') }}" class="truncate text-lg font-bold text-ink">My learning</a>
         </div>

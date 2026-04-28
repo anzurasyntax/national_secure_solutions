@@ -63,10 +63,14 @@ class StudentCourseController extends Controller
             abort(404);
         }
 
-        $this->progressService->markModuleComplete(Auth::user(), $module);
+        $certificateIssued = $this->progressService->markModuleComplete(Auth::user(), $module);
+
+        $status = $certificateIssued
+            ? 'Module completed. Congratulations! Your certificate is now ready to view and download.'
+            : 'Module marked complete.';
 
         return redirect()
             ->route('student.courses.learn', $course)
-            ->with('status', 'Module marked complete.');
+            ->with('status', $status);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificate;
+use App\Models\SiteSetting;
 use Illuminate\Contracts\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -18,6 +19,8 @@ class CertificateVerifyController extends Controller
 
         $certificate->load(['user', 'course']);
 
-        return view('certificates.verify', compact('certificate'));
+        $siteSetting = SiteSetting::current();
+
+        return view('certificates.verify', compact('certificate', 'siteSetting'));
     }
 }

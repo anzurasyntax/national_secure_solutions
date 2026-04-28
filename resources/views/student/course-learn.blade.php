@@ -20,7 +20,7 @@
             @if ($certificate)
                 <a href="{{ route('certificates.verify', $certificate->verify_token) }}" target="_blank"
                    class="rounded-lg border-2 border-primary bg-white px-4 py-3 text-sm font-semibold text-primary hover:bg-red-50">
-                    View certificate
+                    View / Download certificate
                 </a>
             @endif
         </div>

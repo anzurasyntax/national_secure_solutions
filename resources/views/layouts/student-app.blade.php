@@ -1,13 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="min-h-[55vh] bg-[#f4f6f9] pb-20">
-        @include('student.partials.sidebar')
-        <div class="lg:pl-64">
-            @include('student.partials.header')
-            <div class="px-4 py-6 sm:px-6 lg:px-10">
-                @include('student.partials.flash-session')
-                @yield('student_content')
+    <div class="min-h-[55vh] bg-[#f4f6f9] py-8 pb-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-[16rem_minmax(0,1fr)] lg:items-start lg:gap-8">
+                @include('student.partials.sidebar')
+
+                <div class="min-w-0">
+                    @include('student.partials.header')
+                    <div class="mt-6">
+                        @include('student.partials.flash-session')
+                        @yield('student_content')
+                    </div>
+                </div>
             </div>
         </div>
     </div>

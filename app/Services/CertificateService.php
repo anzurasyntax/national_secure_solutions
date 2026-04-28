@@ -19,7 +19,7 @@ class CertificateService
             'serial_number' => $serial,
             'user_id' => $user->id,
             'course_id' => $course->id,
-            'student_name' => $user->name,
+            'student_name' => $user->displayFullName(),
             'course_title_snapshot' => $course->title,
             'issued_at' => now(),
         ]);

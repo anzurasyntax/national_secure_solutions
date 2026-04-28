@@ -1,6 +1,6 @@
 @auth
     @php($user = auth()->user())
-    <header class="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 bg-white px-4 py-4 shadow-sm sm:px-6 lg:px-10">
+    <header class="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm sm:px-6">
         <div class="flex min-w-0 flex-1 items-center gap-3 lg:gap-4">
             <button type="button" id="student-sidebar-toggle"
                     class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 lg:hidden"
