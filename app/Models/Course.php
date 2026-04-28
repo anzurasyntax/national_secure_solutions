@@ -12,6 +12,14 @@ use Illuminate\Support\Str;
     'slug',
     'summary',
     'description',
+    'categories',
+    'learning_outcomes',
+    'faq_sections',
+    'material_includes',
+    'requirements_list',
+    'audience',
+    'level_label',
+    'detail_last_updated_at',
     'price',
     'currency',
     'is_published',
@@ -60,6 +68,12 @@ class Course extends Model
             'is_published' => 'boolean',
             'price' => 'decimal:2',
             'duration_minutes' => 'integer',
+            'categories' => 'array',
+            'learning_outcomes' => 'array',
+            'faq_sections' => 'array',
+            'material_includes' => 'array',
+            'requirements_list' => 'array',
+            'detail_last_updated_at' => 'date',
         ];
     }
 }

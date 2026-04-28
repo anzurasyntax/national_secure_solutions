@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateVerifyController;
 use App\Http\Controllers\CourseCatalogController;
@@ -27,6 +28,11 @@ use App\Http\Controllers\CoursePaymentController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\Student\StudentCourseController;
 use App\Http\Controllers\Student\StudentDashboardController;
+use App\Http\Controllers\Student\StudentEnrolledCoursesController;
+use App\Http\Controllers\Student\StudentExtrasController;
+use App\Http\Controllers\Student\StudentOrdersController;
+use App\Http\Controllers\Student\StudentProfileController;
+use App\Http\Controllers\Student\StudentSettingsController;
 use App\Models\AboutPage;
 use App\Models\BlogPost;
 use App\Models\HeroSlide;
@@ -99,8 +105,19 @@ Route::get('/course-payments/order/{order}/return', [CoursePaymentController::cl
 
 Route::get('/certificates/verify/{token}', [CertificateVerifyController::class, 'show'])->name('certificates.verify');
 
-Route::middleware('auth')->prefix('my-learning')->name('student.')->group(function () {
+Route::middleware(['auth', 'student.only'])->prefix('my-learning')->name('student.')->group(function () {
     Route::get('/', [StudentDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [StudentProfileController::class, 'show'])->name('profile');
+    Route::get('/enrolled', [StudentEnrolledCoursesController::class, 'index'])->name('enrolled');
+    Route::get('/reviews', [StudentExtrasController::class, 'reviews'])->name('reviews');
+    Route::get('/quiz-attempts', [StudentExtrasController::class, 'quizAttempts'])->name('quiz-attempts');
+    Route::get('/wishlist', [StudentExtrasController::class, 'wishlist'])->name('wishlist');
+    Route::get('/orders', [StudentOrdersController::class, 'index'])->name('orders');
+    Route::get('/qa', [StudentExtrasController::class, 'qa'])->name('qa');
+    Route::get('/settings', [StudentSettingsController::class, 'edit'])->name('settings');
+    Route::put('/settings/profile', [StudentSettingsController::class, 'updateProfile'])->name('settings.profile');
+    Route::put('/settings/password', [StudentSettingsController::class, 'updatePassword'])->name('settings.password');
+
     Route::get('/courses/{course}', [StudentCourseController::class, 'learn'])->name('courses.learn');
     Route::get('/courses/{course}/modules/{module}', [StudentCourseController::class, 'module'])->name('courses.module');
     Route::post('/courses/{course}/modules/{module}/complete', [StudentCourseController::class, 'completeModule'])->name('courses.module.complete');
@@ -109,6 +126,7 @@ Route::middleware('auth')->prefix('my-learning')->name('student.')->group(functi
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
+    Route::post('/register', [RegisterController::class, 'store'])->name('register');
 });
 
 Route::middleware('auth')->group(function () {

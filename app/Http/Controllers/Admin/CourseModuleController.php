@@ -27,6 +27,8 @@ class CourseModuleController extends Controller
     public function store(StoreCourseModuleRequest $request, Course $course): RedirectResponse
     {
         $validated = $request->validated();
+        $validated['lesson_outline'] = $this->lessonOutlineFromRaw($request->input('lesson_outline_input'));
+        unset($validated['lesson_outline_input']);
         $validated['course_id'] = $course->id;
         $validated['sort_order'] = $validated['sort_order']
             ?? (((int) ($course->modules()->max('sort_order') ?? 0)) + 1);
@@ -47,7 +49,11 @@ class CourseModuleController extends Controller
     {
         $this->assertModuleBelongs($course, $module);
 
-        $module->update($request->validated());
+        $validated = $request->validated();
+        $validated['lesson_outline'] = $this->lessonOutlineFromRaw($request->input('lesson_outline_input'));
+        unset($validated['lesson_outline_input']);
+
+        $module->update($validated);
 
         return redirect()->route('admin.courses.modules.index', $course)->with('status', 'Module updated.');
     }
@@ -66,5 +72,34 @@ class CourseModuleController extends Controller
         if ($module->course_id !== $course->id) {
             abort(404);
         }
+    }
+
+    /**
+     * One line per item: "Label | optional duration" (pipe separator). Example: Presentation | 02:00:00
+     *
+     * @return array<int, array{label: string, duration_label: string|null}>|null
+     */
+    private function lessonOutlineFromRaw(mixed $raw): ?array
+    {
+        if (! is_string($raw) || trim($raw) === '') {
+            return null;
+        }
+
+        $out = [];
+        foreach (preg_split('/\r\n|\r|\n/', $raw) ?: [] as $line) {
+            $line = trim((string) $line);
+            if ($line === '') {
+                continue;
+            }
+            $parts = array_map('trim', explode('|', $line, 2));
+            $label = $parts[0] ?? '';
+            $durationLabel = isset($parts[1]) && $parts[1] !== '' ? $parts[1] : null;
+            if ($label === '') {
+                continue;
+            }
+            $out[] = ['label' => $label, 'duration_label' => $durationLabel];
+        }
+
+        return $out === [] ? null : $out;
     }
 }

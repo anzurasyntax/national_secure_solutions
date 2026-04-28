@@ -27,7 +27,12 @@ class StudentCourseController extends Controller
 
         $certificate = Auth::user()->certificates()->where('course_id', $course->id)->first();
 
-        return view('student.course-learn', compact('course', 'completedIds', 'certificate'));
+        return view('student.course-learn', [
+            'course' => $course,
+            'completedIds' => $completedIds,
+            'certificate' => $certificate,
+            'activeNav' => 'enrolled',
+        ]);
     }
 
     public function module(Course $course, CourseModule $module): View
@@ -41,7 +46,13 @@ class StudentCourseController extends Controller
         $completedIds = $this->progressService->completedModuleIds(Auth::user(), $course);
         $isDone = in_array($module->id, $completedIds, true);
 
-        return view('student.course-module', compact('course', 'module', 'completedIds', 'isDone'));
+        return view('student.course-module', [
+            'course' => $course,
+            'module' => $module,
+            'completedIds' => $completedIds,
+            'isDone' => $isDone,
+            'activeNav' => 'enrolled',
+        ]);
     }
 
     public function completeModule(Request $request, Course $course, CourseModule $module): RedirectResponse

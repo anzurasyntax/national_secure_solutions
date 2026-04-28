@@ -18,7 +18,9 @@ class UpdateCourseModuleRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'duration_minutes' => ['nullable', 'integer', 'min:1', 'max:99999'],
             'body' => ['nullable', 'string', 'max:50000'],
+            'lesson_outline_input' => ['nullable', 'string', 'max:60000'],
             'video_url' => ['nullable', 'string', 'max:2048'],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:999999'],
         ];

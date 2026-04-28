@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\CoursePurchaseService;
+use App\Support\SafeInternalRedirect;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,11 @@ class LoginController extends Controller
             $purchaseService->attachPaidOrdersForUser($user);
         } catch (\Throwable $e) {
             report($e);
+        }
+
+        $to = SafeInternalRedirect::courseCheckoutPath($request->input('redirect'));
+        if ($to !== null) {
+            return redirect()->to($to);
         }
 
         return redirect()->intended(route('student.dashboard'));
