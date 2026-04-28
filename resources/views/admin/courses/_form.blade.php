@@ -1,8 +1,4 @@
 @php($isEdit = (bool) ($course?->exists))
-@php
-    $_faqRaw = old('faq_sections', $course?->faq_sections ?? []);
-    $faqRows = is_array($_faqRaw) && $_faqRaw !== [] ? $_faqRaw : [['title' => '', 'body' => '']];
-@endphp
 
 <div class="grid gap-6 lg:grid-cols-2">
     <div class="lg:col-span-2">
@@ -102,7 +98,7 @@
             <label class="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-600">FAQ / “About course” sections</label>
             <p class="mb-3 text-xs text-gray-500">Heading + answer blocks (shown like the Ontario training reference page).</p>
             <div id="faq-rows" class="space-y-4">
-                @foreach ($faqRows as $i => $faqRow)
+                @foreach ((is_array(old('faq_sections', $course?->faq_sections ?? [])) && old('faq_sections', $course?->faq_sections ?? []) !== [] ? old('faq_sections', $course?->faq_sections ?? []) : [['title' => '', 'body' => '']]) as $i => $faqRow)
                     @php($faqRow = is_array($faqRow) ? $faqRow : ['title' => '', 'body' => ''])
                     <div class="faq-row rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
                         <div class="flex justify-between gap-4">
