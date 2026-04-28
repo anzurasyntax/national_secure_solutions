@@ -4,7 +4,7 @@
 @section('heading', 'Add module')
 
 @section('content')
-    <form action="{{ route('admin.courses.modules.store', $course) }}" method="POST" class="space-y-8 rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+    <form action="{{ route('admin.courses.modules.store', $course) }}" method="POST" enctype="multipart/form-data" class="space-y-8 rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
         @csrf
         @include('admin.course-modules._form', ['module' => null])
 

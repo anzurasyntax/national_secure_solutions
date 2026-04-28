@@ -12,11 +12,28 @@
 
         <h1 class="mt-4 font-heading text-3xl font-bold text-ink">{{ $module->title }}</h1>
 
-        @if ($module->video_url)
+        @php
+            $moduleVideos = collect($module->video_paths ?? [])
+                ->filter(fn ($path) => is_string($path) && trim($path) !== '')
+                ->values();
+        @endphp
+
+        @if ($moduleVideos->isNotEmpty())
+            <div class="mt-8 space-y-6">
+                @foreach ($moduleVideos as $videoPath)
+                    <div class="overflow-hidden rounded-2xl bg-black">
+                        <video controls preload="metadata" class="w-full">
+                            <source src="{{ asset($videoPath) }}">
+                            Your browser does not support embedded videos.
+                        </video>
+                    </div>
+                @endforeach
+            </div>
+        @elseif ($module->video_url)
             <div class="mt-8 aspect-video overflow-hidden rounded-2xl bg-black">
                 <iframe src="{{ $module->video_url }}" class="h-full w-full" title="Video" allowfullscreen loading="lazy"></iframe>
             </div>
-            <p class="mt-2 text-xs text-slate-500">If the video does not load, your provider may block embedding — open the URL directly.</p>
+            <p class="mt-2 text-xs text-slate-500">Legacy URL-based video for older modules.</p>
         @endif
 
         @if ($module->body)

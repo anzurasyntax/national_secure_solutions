@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'body',
     'lesson_outline',
     'video_url',
+    'video_paths',
     'sort_order',
 ])]
 class CourseModule extends Model
@@ -34,6 +35,7 @@ class CourseModule extends Model
             'sort_order' => 'integer',
             'duration_minutes' => 'integer',
             'lesson_outline' => 'array',
+            'video_paths' => 'array',
         ];
     }
 }
