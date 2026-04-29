@@ -22,29 +22,38 @@
     </div>
 
     <div>
-        <label class="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-600">Upload module video(s)</label>
-        <input type="file" name="video_files[]" accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-msvideo,video/x-matroska" multiple
+        <label class="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-600">Module media</label>
+        <input type="file" name="material_files[]"
+               accept="video/*,image/*,.ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"
+               multiple
                class="block w-full text-sm text-gray-700 file:mr-4 file:rounded-lg file:border-0 file:bg-ink file:px-4 file:py-2 file:font-heading file:text-xs file:font-bold file:uppercase file:text-white hover:file:bg-[#111a35]">
-        <p class="mt-1 text-xs text-gray-500">You can select multiple video files (max 200MB each).</p>
-        @error('video_files')
+        @error('material_files')
             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
         @enderror
-        @error('video_files.*')
+        @error('material_files.*')
             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
         @enderror
 
-        @if ($module?->video_paths && is_array($module->video_paths) && count($module->video_paths))
+        @php
+            $materialsForForm = $module ? $module->materialsList() : [];
+        @endphp
+        @if (count($materialsForForm))
             <div class="mt-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
-                <p class="text-xs font-semibold uppercase tracking-wide text-gray-600">Current uploaded videos</p>
-                <ul class="mt-2 space-y-1 text-xs text-gray-600">
-                    @foreach ($module->video_paths as $videoPath)
-                        <li><code class="rounded bg-white px-1 py-0.5">{{ $videoPath }}</code></li>
+                <p class="text-xs font-semibold uppercase tracking-wide text-gray-600">Current uploads (check to remove when saving)</p>
+                <ul class="mt-2 space-y-2 text-xs text-gray-700">
+                    @foreach ($materialsForForm as $m)
+                        <li class="flex flex-wrap items-start gap-2 rounded border border-gray-200 bg-white p-2">
+                            <label class="inline-flex items-start gap-2">
+                                <input type="checkbox" name="remove_material_ids[]" value="{{ $m['id'] }}"
+                                       class="mt-0.5 rounded border-gray-300 text-primary focus:ring-primary">
+                                <span>
+                                    <span class="font-semibold uppercase text-gray-500">{{ $m['type'] }}</span>
+                                    <span class="ml-1">{{ $m['name'] }}</span>
+                                </span>
+                            </label>
+                        </li>
                     @endforeach
                 </ul>
-                <label class="mt-3 inline-flex items-center gap-2 text-xs text-red-700">
-                    <input type="checkbox" name="remove_existing_videos" value="1" class="rounded border-gray-300 text-primary focus:ring-primary">
-                    Remove current videos (if no new file is uploaded)
-                </label>
             </div>
         @endif
     </div>
@@ -58,7 +67,7 @@
 
     @php
         $outlineLines = '';
-        if ($module?->lesson_outline && is_array($module->lesson_outline)) {
+        if ($module !== null && $module->lesson_outline && is_array($module->lesson_outline)) {
             $outlineLines = collect($module->lesson_outline)->map(function ($row) {
                 $row = is_array($row) ? $row : [];
                 $label = $row['label'] ?? '';

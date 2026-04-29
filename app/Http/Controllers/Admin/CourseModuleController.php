@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreCourseModuleRequest;
 use App\Http\Requests\Admin\UpdateCourseModuleRequest;
 use App\Models\Course;
 use App\Models\CourseModule;
+use App\Services\CourseModuleMediaService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
@@ -15,6 +16,10 @@ use Illuminate\Support\Str;
 
 class CourseModuleController extends Controller
 {
+    public function __construct(
+        private readonly CourseModuleMediaService $mediaService,
+    ) {}
+
     public function index(Course $course): View
     {
         $modules = $course->modules()->orderBy('sort_order')->orderBy('id')->get();
@@ -31,15 +36,16 @@ class CourseModuleController extends Controller
     {
         $validated = $request->validated();
         $validated['lesson_outline'] = $this->lessonOutlineFromRaw($request->input('lesson_outline_input'));
-        unset($validated['lesson_outline_input']);
-        unset($validated['video_files']);
+        unset($validated['lesson_outline_input'], $validated['material_files']);
+
         $validated['course_id'] = $course->id;
         $validated['sort_order'] = $validated['sort_order']
             ?? (((int) ($course->modules()->max('sort_order') ?? 0)) + 1);
 
-        if ($request->hasFile('video_files')) {
-            $validated['video_paths'] = $this->storeVideos($request->file('video_files'));
-        }
+        $validated['module_materials'] = $request->hasFile('material_files')
+            ? $this->storeNewMaterials($request->file('material_files'))
+            : [];
+        $validated['video_paths'] = null;
 
         CourseModule::query()->create($validated);
 
@@ -59,18 +65,31 @@ class CourseModuleController extends Controller
 
         $validated = $request->validated();
         $validated['lesson_outline'] = $this->lessonOutlineFromRaw($request->input('lesson_outline_input'));
-        unset($validated['lesson_outline_input']);
-        unset($validated['video_files'], $validated['remove_existing_videos']);
+        unset($validated['lesson_outline_input'], $validated['material_files'], $validated['remove_material_ids']);
 
-        $removeExisting = $request->boolean('remove_existing_videos');
+        $removeIds = array_values(array_filter(array_map(
+            fn ($id) => is_string($id) ? trim($id) : '',
+            $request->input('remove_material_ids', []) ?? []
+        )));
 
-        if ($request->hasFile('video_files')) {
-            $this->deleteStoredVideos($module->video_paths);
-            $validated['video_paths'] = $this->storeVideos($request->file('video_files'));
-        } elseif ($removeExisting) {
-            $this->deleteStoredVideos($module->video_paths);
-            $validated['video_paths'] = null;
+        $current = $module->materialsList();
+        foreach ($current as $item) {
+            if (in_array($item['id'], $removeIds, true)) {
+                $this->deleteMaterialFromDisk($item);
+            }
         }
+
+        $kept = array_values(array_filter(
+            $current,
+            fn (array $item) => ! in_array($item['id'], $removeIds, true)
+        ));
+
+        $newItems = $request->hasFile('material_files')
+            ? $this->storeNewMaterials($request->file('material_files'))
+            : [];
+
+        $validated['module_materials'] = array_merge($kept, $newItems);
+        $validated['video_paths'] = null;
 
         $module->update($validated);
 
@@ -81,7 +100,10 @@ class CourseModuleController extends Controller
     {
         $this->assertModuleBelongs($course, $module);
 
-        $this->deleteStoredVideos($module->video_paths);
+        foreach ($module->materialsList() as $item) {
+            $this->deleteMaterialFromDisk($item);
+        }
+
         $module->delete();
 
         return redirect()->route('admin.courses.modules.index', $course)->with('status', 'Module deleted.');
@@ -106,7 +128,7 @@ class CourseModuleController extends Controller
         }
 
         $out = [];
-        foreach (preg_split('/\r\n|\r|\n/', $raw) ?: [] as $line) {
+        foreach ((preg_split('/\r\n|\r|\n/', $raw) ?: []) as $line) {
             $line = trim((string) $line);
             if ($line === '') {
                 continue;
@@ -125,57 +147,203 @@ class CourseModuleController extends Controller
 
     /**
      * @param  array<int, UploadedFile>|UploadedFile|null  $files
-     * @return array<int, string>|null
+     * @return array<int, array<string, mixed>>
      */
-    private function storeVideos(array|UploadedFile|null $files): ?array
+    private function storeNewMaterials(array|UploadedFile|null $files): array
     {
         if ($files instanceof UploadedFile) {
             $files = [$files];
         }
 
-        if (! is_array($files) || $files === []) {
-            return null;
-        }
-
-        $dir = public_path('uploads/course-modules/videos');
-        if (! File::isDirectory($dir)) {
-            File::makeDirectory($dir, 0755, true);
+        if (! is_array($files)) {
+            return [];
         }
 
         $stored = [];
         foreach ($files as $file) {
-            if (! $file instanceof UploadedFile) {
+            if (! $file instanceof UploadedFile || ! $file->isValid()) {
                 continue;
             }
-
-            $extension = strtolower($file->getClientOriginalExtension() ?: 'mp4');
-            $base = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $filename = Str::slug($base).'-'.uniqid('', true).'.'.$extension;
-            $file->move($dir, $filename);
-            $stored[] = 'uploads/course-modules/videos/'.$filename;
+            $one = $this->storeOneMaterial($file);
+            if ($one !== null) {
+                $stored[] = $one;
+            }
         }
 
-        return $stored === [] ? null : $stored;
+        return $stored;
     }
 
     /**
-     * @param  array<int, string>|null  $paths
+     * @return array<string, mixed>|null
      */
-    private function deleteStoredVideos(?array $paths): void
+    private function storeOneMaterial(UploadedFile $file): ?array
     {
-        if (! is_array($paths)) {
+        $type = $this->detectMaterialType($file);
+        if ($type === null) {
+            return null;
+        }
+
+        if ($type === 'video') {
+            $path = $this->storeInSubdir(
+                $file,
+                'uploads/course-modules/videos',
+                ['mp4', 'webm', 'ogg', 'mov', 'avi', 'mkv'],
+                'mp4',
+            );
+            if ($path === null) {
+                return null;
+            }
+
+            return [
+                'id' => (string) Str::uuid(),
+                'type' => 'video',
+                'path' => $path,
+                'name' => $file->getClientOriginalName(),
+                'slides' => null,
+            ];
+        }
+
+        if ($type === 'image') {
+            $path = $this->storeInSubdir(
+                $file,
+                'uploads/course-modules/images',
+                ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+                'jpg',
+            );
+            if ($path === null) {
+                return null;
+            }
+
+            return [
+                'id' => (string) Str::uuid(),
+                'type' => 'image',
+                'path' => $path,
+                'name' => $file->getClientOriginalName(),
+                'slides' => null,
+            ];
+        }
+
+        $id = (string) Str::uuid();
+        $path = $this->storeInSubdir(
+            $file,
+            'uploads/course-modules/documents',
+            ['ppt', 'pptx'],
+            'pptx',
+        );
+        if ($path === null) {
+            return null;
+        }
+
+        $slidesRel = 'uploads/course-modules/slides/'.$id;
+        $slides = $this->mediaService->extractPptSlides(public_path($path), $slidesRel);
+
+        return [
+            'id' => $id,
+            'type' => 'ppt',
+            'path' => $path,
+            'name' => $file->getClientOriginalName(),
+            'slides' => $slides,
+        ];
+    }
+
+    private function storeInSubdir(
+        UploadedFile $file,
+        string $relativeDir,
+        array $allowedExtensions,
+        string $fallbackExtension,
+    ): ?string {
+        $dir = public_path($relativeDir);
+        if (! File::isDirectory($dir)) {
+            File::makeDirectory($dir, 0755, true);
+        }
+
+        $extension = strtolower((string) ($file->getClientOriginalExtension() ?: $fallbackExtension));
+        if ($allowedExtensions !== [] && ! in_array($extension, $allowedExtensions, true)) {
+            $extension = $allowedExtensions[0];
+        }
+
+        $base = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filename = Str::slug($base).'-'.uniqid('', true).'.'.$extension;
+        $file->move($dir, $filename);
+
+        return rtrim($relativeDir, '/').'/'.$filename;
+    }
+
+    private function detectMaterialType(UploadedFile $file): ?string
+    {
+        $mime = (string) $file->getMimeType();
+        $ext = strtolower((string) $file->getClientOriginalExtension());
+
+        if (in_array($ext, ['ppt', 'pptx'], true)) {
+            return 'ppt';
+        }
+
+        if (in_array($ext, ['mp4', 'webm', 'ogg', 'ogv', 'mov', 'avi', 'mkv'], true)) {
+            return 'video';
+        }
+
+        if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp'], true)) {
+            return 'image';
+        }
+
+        if (str_starts_with($mime, 'video/')) {
+            return 'video';
+        }
+
+        if (str_starts_with($mime, 'image/')) {
+            return 'image';
+        }
+
+        if (in_array($mime, [
+            'application/vnd.ms-powerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'application/vnd.ms-powerpoint.presentation.macroEnabled.12',
+        ], true)) {
+            return 'ppt';
+        }
+
+        if ($mime === 'application/octet-stream' && in_array($ext, ['ppt', 'pptx', 'mp4', 'mov', 'webm', 'jpg', 'jpeg', 'png', 'gif', 'webp'], true)) {
+            if (in_array($ext, ['ppt', 'pptx'], true)) {
+                return 'ppt';
+            }
+            if (in_array($ext, ['mp4', 'mov', 'webm', 'mkv', 'avi', 'ogg'], true)) {
+                return 'video';
+            }
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp'], true)) {
+                return 'image';
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $material
+     */
+    private function deleteMaterialFromDisk(array $material): void
+    {
+        $type = $material['type'] ?? '';
+        $id = $material['id'] ?? '';
+
+        if ($type === 'ppt' && is_string($id) && $id !== '' && ! str_starts_with($id, 'legacy-')) {
+            $slideDir = public_path('uploads/course-modules/slides/'.$id);
+            if (File::isDirectory($slideDir)) {
+                File::deleteDirectory($slideDir);
+            }
+        }
+
+        $this->deletePublicUpload($material['path'] ?? null);
+    }
+
+    private function deletePublicUpload(mixed $path): void
+    {
+        if (! is_string($path) || $path === '' || ! str_starts_with($path, 'uploads/course-modules/')) {
             return;
         }
 
-        foreach ($paths as $path) {
-            if (! is_string($path) || ! str_starts_with($path, 'uploads/course-modules/videos/')) {
-                continue;
-            }
-
-            $fullPath = public_path($path);
-            if (File::exists($fullPath)) {
-                File::delete($fullPath);
-            }
+        $fullPath = public_path($path);
+        if (File::exists($fullPath) && File::isFile($fullPath)) {
+            File::delete($fullPath);
         }
     }
 }

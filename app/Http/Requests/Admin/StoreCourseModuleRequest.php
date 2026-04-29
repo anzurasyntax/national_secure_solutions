@@ -21,8 +21,12 @@ class StoreCourseModuleRequest extends FormRequest
             'duration_minutes' => ['nullable', 'integer', 'min:1', 'max:99999'],
             'body' => ['nullable', 'string', 'max:50000'],
             'lesson_outline_input' => ['nullable', 'string', 'max:60000'],
-            'video_files' => ['nullable', 'array'],
-            'video_files.*' => ['file', 'mimetypes:video/mp4,video/webm,video/ogg,video/quicktime,video/x-msvideo,video/x-matroska', 'max:204800'],
+            'material_files' => ['nullable', 'array'],
+            'material_files.*' => [
+                'file',
+                'max:204800',
+                'mimes:mp4,webm,ogv,ogg,mov,avi,mkv,ppt,pptx,jpg,jpeg,png,gif,webp',
+            ],
             'sort_order' => ['nullable', 'integer', 'min:0', 'max:999999'],
         ];
     }
