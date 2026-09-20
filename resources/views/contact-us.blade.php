@@ -22,11 +22,11 @@
             </svg>
             <h3 class="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">Our Location</h3>
             <p class="mb-8 text-base leading-relaxed text-gray-500 sm:text-xl">
-                5062 N 19th Ave Suite 103, Phoenix, AZ 85015, USA
+                {!! nl2br(e($siteSetting->location)) !!}
             </p>
             <!-- Button sits at the bottom edge -->
             <div class="translate-y-1/2 mt-auto">
-                <a href="https://maps.google.com" target="_blank"
+                <a href="{{ $siteSetting->mapsTrackUrl() }}" target="_blank" rel="noopener noreferrer"
                    class="bg-red-600 hover:bg-red-700 text-white text-sm font-bold tracking-widest uppercase px-8 py-3 rounded block transition">
                     TRACK
                 </a>
@@ -42,10 +42,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 18v1a3 3 0 01-3 3h-2"/>
             </svg>
             <h3 class="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">Phone Number</h3>
-            <p class="mb-8 text-base leading-relaxed text-gray-500 sm:text-xl">773-319-6420</p>
+            <p class="mb-8 text-base leading-relaxed text-gray-500 sm:text-xl">{{ $siteSetting->phone }}</p>
             <!-- Button sits at the bottom edge -->
             <div class="translate-y-1/2 mt-auto">
-                <a href="tel:7733196420"
+                <a href="{{ $siteSetting->telHref() }}"
                    class="bg-red-600 hover:bg-red-700 text-white text-sm font-bold tracking-widest uppercase px-8 py-3 rounded block transition">
                     CALL US
                 </a>
@@ -61,10 +61,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2 18l6-5M22 18l-6-5"/>
             </svg>
             <h3 class="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">Email Address</h3>
-            <p class="mb-8 break-all text-base leading-relaxed text-gray-500 sm:text-xl sm:break-normal">info@nationalsecuresolutions.com</p>
+            <p class="mb-8 break-all text-base leading-relaxed text-gray-500 sm:text-xl sm:break-normal">{{ $siteSetting->email }}</p>
             <!-- Button sits at the bottom edge -->
             <div class="translate-y-1/2 mt-auto">
-                <a href="mailto:info@nationalsecuresolutions.com"
+                <a href="mailto:{{ $siteSetting->email }}"
                    class="bg-red-600 hover:bg-red-700 text-white text-sm font-bold tracking-widest uppercase px-8 py-3 rounded block transition">
                     MAIL US
                 </a>
@@ -76,43 +76,72 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
 
                 <!-- Left: Contact Form -->
-                <div class="flex flex-col justify-start gap-5 pr-0 md:pr-8">
+                <form method="POST" action="{{ route('contact-us.store') }}" class="flex flex-col justify-start gap-5 pr-0 md:pr-8">
+                    @csrf
+
+                    @if (session('status'))
+                        <div class="rounded border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
                     <!-- Name -->
-                    <div class="border border-gray-300 rounded px-4 py-3">
+                    <div class="border border-gray-300 rounded px-4 py-3 @error('name') border-red-500 @enderror">
                         <input
                             type="text"
+                            name="name"
+                            value="{{ old('name') }}"
                             placeholder="Name"
+                            required
                             class="w-full text-gray-500 text-base outline-none bg-transparent placeholder-gray-400"
                         />
                     </div>
+                    @error('name')
+                        <p class="-mt-3 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
 
                     <!-- Email -->
-                    <div class="border border-gray-300 rounded px-4 py-3">
+                    <div class="border border-gray-300 rounded px-4 py-3 @error('email') border-red-500 @enderror">
                         <input
                             type="email"
+                            name="email"
+                            value="{{ old('email') }}"
                             placeholder="Email"
+                            required
                             class="w-full text-gray-500 text-base outline-none bg-transparent placeholder-gray-400"
                         />
                     </div>
+                    @error('email')
+                        <p class="-mt-3 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
 
                     <!-- Phone -->
-                    <div class="border border-gray-300 rounded px-4 py-3">
+                    <div class="border border-gray-300 rounded px-4 py-3 @error('phone') border-red-500 @enderror">
                         <input
                             type="tel"
+                            name="phone"
+                            value="{{ old('phone') }}"
                             placeholder="Phone"
                             class="w-full text-gray-500 text-base outline-none bg-transparent placeholder-gray-400"
                         />
                     </div>
+                    @error('phone')
+                        <p class="-mt-3 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
 
                     <!-- Message -->
-                    <div class="border border-gray-300 rounded px-4 py-3">
-                <textarea
-                    placeholder="Message"
-                    rows="6"
-                    class="w-full text-gray-500 text-base outline-none bg-transparent placeholder-gray-400 resize-y"
-                ></textarea>
+                    <div class="border border-gray-300 rounded px-4 py-3 @error('message') border-red-500 @enderror">
+                        <textarea
+                            name="message"
+                            placeholder="Message"
+                            rows="6"
+                            required
+                            class="w-full text-gray-500 text-base outline-none bg-transparent placeholder-gray-400 resize-y"
+                        >{{ old('message') }}</textarea>
                     </div>
+                    @error('message')
+                        <p class="-mt-3 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
 
                     <!-- Submit Button -->
                     <div>
@@ -123,12 +152,13 @@
                         </button>
                     </div>
 
-                </div>
+                </form>
 
                 <!-- Right: Google Map -->
                 <div class="h-[320px] w-full overflow-hidden rounded sm:h-[420px] lg:h-[520px]">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2966.7623933872906!2d-87.84689492346!3d41.98381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fb00e8c7a43a1%3A0x4a1c5c0b7f0f0000!2s8765%20W%20Higgins%20Rd%2C%20Chicago%2C%20IL%2060631%2C%20USA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                        src="{{ $siteSetting->mapEmbedUrl() }}"
+                        title="Map showing {{ $siteSetting->locationQuery() }}"
                         width="100%"
                         height="100%"
                         style="border:0;"

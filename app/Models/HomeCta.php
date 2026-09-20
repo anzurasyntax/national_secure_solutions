@@ -23,7 +23,7 @@ class HomeCta extends Model
     public static function defaultAttributes(): array
     {
         return [
-            'headline' => 'GET FREE CONSULTATION (OR) CALL US: 773-319-6420',
+            'headline' => 'GET FREE CONSULTATION (OR) CALL US: {phone}',
             'subheading' => 'CONTACT US TODAY FOR A FREE CONSULTATION AND DISCOVER TAILORED SECURITY SOLUTIONS FOR YOUR NEEDS.',
             'button_label' => 'GET INQUIRY',
             'button_url' => '#',
@@ -48,5 +48,18 @@ class HomeCta extends Model
         }
 
         return $path !== '' ? asset($path) : asset('img/stat_bg.png');
+    }
+
+    public function headlineWithPhone(string $phone): string
+    {
+        $headline = (string) $this->headline;
+
+        if (str_contains($headline, '{phone}')) {
+            return str_replace('{phone}', $phone, $headline);
+        }
+
+        $updated = preg_replace('/\b\d{3}-\d{3}-\d{4}\b/', $phone, $headline, 1);
+
+        return $updated ?? $headline;
     }
 }

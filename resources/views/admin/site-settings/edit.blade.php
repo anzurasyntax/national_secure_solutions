@@ -56,9 +56,17 @@
 
                 <div>
                     <label class="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-600">Location</label>
-                    <p class="mb-2 text-xs text-gray-500">Use line breaks for separate address lines (shown on the footer).</p>
+                    <p class="mb-2 text-xs text-gray-500">Use line breaks for separate address lines (shown on the footer and contact page). The contact page map is generated from this address unless a custom embed URL is set below.</p>
                     <textarea name="location" rows="4" required
                               class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-800 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">{{ old('location', $setting->location) }}</textarea>
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-600">Map embed URL (optional)</label>
+                    <p class="mb-2 text-xs text-gray-500">Paste a Google Maps embed URL for the contact page iframe. Leave empty to auto-generate from the location above.</p>
+                    <input type="text" name="map_embed_url" value="{{ old('map_embed_url', $setting->map_embed_url) }}"
+                           placeholder="https://www.google.com/maps/embed?..."
+                           class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-800 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
                 </div>
 
                 <div class="overflow-hidden rounded-2xl border border-gray-100 bg-[#fafbfc]">

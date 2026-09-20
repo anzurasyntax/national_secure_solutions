@@ -10,6 +10,7 @@ class SiteSetting extends Model
         'phone',
         'email',
         'location',
+        'map_embed_url',
         'working_time',
         'facebook_url',
         'x_url',
@@ -64,6 +65,35 @@ class SiteSetting extends Model
         $digits = preg_replace('/\D+/', '', (string) $this->phone);
 
         return $digits !== '' ? 'tel:'.$digits : '#';
+    }
+
+    public function locationQuery(): string
+    {
+        return trim(preg_replace('/\s+/', ' ', str_replace(["\r\n", "\r", "\n"], ', ', (string) $this->location)) ?? '');
+    }
+
+    public function mapsTrackUrl(): string
+    {
+        $query = $this->locationQuery();
+
+        return $query !== ''
+            ? 'https://www.google.com/maps/search/?api=1&query='.rawurlencode($query)
+            : 'https://maps.google.com';
+    }
+
+    public function mapEmbedUrl(): string
+    {
+        $custom = trim((string) ($this->map_embed_url ?? ''));
+
+        if ($custom !== '') {
+            return $custom;
+        }
+
+        $query = $this->locationQuery();
+
+        return $query !== ''
+            ? 'https://maps.google.com/maps?q='.rawurlencode($query).'&hl=en&z=14&output=embed'
+            : 'https://maps.google.com';
     }
 
     /**

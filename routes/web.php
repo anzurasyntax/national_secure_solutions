@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\BlogTagController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Admin\WhyChooseUsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CertificateVerifyController;
 use App\Http\Controllers\CourseCatalogController;
 use App\Http\Controllers\CourseCheckoutController;
@@ -84,9 +86,8 @@ Route::get('/training', function () {
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
-Route::get('/contact-us', function () {
-    return view('contact-us');
-})->name('contact-us');
+Route::get('/contact-us', [ContactController::class, 'show'])->name('contact-us');
+Route::post('/contact-us', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact-us.store');
 
 Route::get('/courses/account/complete', [CoursePaymentController::class, 'completeAccountForm'])->name('courses.account.complete');
 Route::post('/courses/account/complete', [CoursePaymentController::class, 'completeAccount'])->name('courses.account.complete.store');
@@ -146,6 +147,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/site-settings', [SiteSettingController::class, 'edit'])->name('site-settings.edit');
         Route::put('/site-settings', [SiteSettingController::class, 'update'])->name('site-settings.update');
+
+        Route::get('/contact-messages', [ContactMessageController::class, 'index'])->name('contact-messages.index');
+        Route::get('/contact-messages/{contact_message}', [ContactMessageController::class, 'show'])->name('contact-messages.show');
+        Route::delete('/contact-messages/{contact_message}', [ContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
 
         Route::resource('hero-slides', HeroSlideController::class)->except(['show']);
 

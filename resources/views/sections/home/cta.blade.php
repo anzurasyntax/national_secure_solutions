@@ -12,7 +12,7 @@
 
         <div class="max-w-3xl">
             <h2 class="font-heading text-2xl font-extrabold uppercase leading-tight tracking-wide sm:text-[32px]">
-                {{ $cta->headline }}
+                {{ $cta->headlineWithPhone($siteSetting->phone) }}
             </h2>
             <p class="mt-4 text-[13px] font-bold uppercase tracking-[1.5px] text-white/70">
                 {{ $cta->subheading }}

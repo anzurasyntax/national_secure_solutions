@@ -170,6 +170,14 @@
                 </div>
             </details>
 
+            <a href="{{ route('admin.contact-messages.index') }}"
+               class="{{ request()->routeIs('admin.contact-messages.*') ? 'bg-white/10 text-white' : 'text-white/75 hover:bg-white/5 hover:text-white' }} flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition">
+                <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white/15 text-white" aria-hidden="true">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H5.25a2.25 2.25 0 01-2.25-2.25V6.75m16.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m16.5 0v.243a2.25 2.25 0 00-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 00-1.07-1.916V6.75"/></svg>
+                </span>
+                Contact messages
+            </a>
+
             <a href="{{ route('admin.site-settings.edit') }}"
                class="{{ request()->routeIs('admin.site-settings.*') ? 'bg-white/10 text-white' : 'text-white/75 hover:bg-white/5 hover:text-white' }} flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition">
                 <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-navy text-white" aria-hidden="true">

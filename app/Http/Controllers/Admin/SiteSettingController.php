@@ -28,6 +28,7 @@ class SiteSettingController extends Controller
             'phone' => ['required', 'string', 'max:80'],
             'email' => ['required', 'email', 'max:255'],
             'location' => ['required', 'string', 'max:2000'],
+            'map_embed_url' => ['nullable', 'string', 'max:5000'],
             'working_time' => ['required', 'string', 'max:255'],
             'facebook_url' => ['nullable', 'string', 'max:2048'],
             'x_url' => ['nullable', 'string', 'max:2048'],
@@ -38,7 +39,7 @@ class SiteSettingController extends Controller
             'remove_logo' => ['sometimes', 'boolean'],
         ]);
 
-        foreach (['facebook_url', 'x_url', 'youtube_url', 'instagram_url', 'pinterest_url'] as $field) {
+        foreach (['facebook_url', 'x_url', 'youtube_url', 'instagram_url', 'pinterest_url', 'map_embed_url'] as $field) {
             $val = $validated[$field] ?? null;
             $validated[$field] = ($val === null || trim((string) $val) === '') ? null : trim((string) $val);
         }

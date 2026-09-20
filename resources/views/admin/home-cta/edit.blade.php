@@ -18,6 +18,7 @@
             <div class="space-y-5 px-6 py-6">
                 <div>
                     <label for="headline" class="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-600">Headline</label>
+                    <p class="mb-2 text-xs text-gray-500">Use <code class="rounded bg-gray-100 px-1">{phone}</code> to insert the phone number from CMS → Site Settings. Existing headlines with a phone number are also updated automatically on the site.</p>
                     <textarea id="headline" name="headline" rows="2" required maxlength="500"
                               class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">{{ old('headline', $homeCta->headline) }}</textarea>
                     @error('headline') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
