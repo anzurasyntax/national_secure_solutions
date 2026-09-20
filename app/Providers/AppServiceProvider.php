@@ -48,9 +48,12 @@ class AppServiceProvider extends ServiceProvider
             $view->with('siteSetting', SiteSetting::current());
         };
 
-        View::composer(
-            ['layouts.app', 'layouts.admin', 'auth.login', 'admin.auth.login'],
-            $siteSettingComposer
-        );
+        View::composer('*', function ($view) use ($siteSettingComposer): void {
+            if ($view->offsetExists('siteSetting')) {
+                return;
+            }
+
+            $siteSettingComposer($view);
+        });
     }
 }
