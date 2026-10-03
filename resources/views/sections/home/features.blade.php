@@ -1,23 +1,49 @@
-<section id="features" class="relative z-10 mx-auto -mt-10 grid w-[92%] grid-cols-1 gap-6 pb-14 sm:w-[88%] md:-mt-12 md:w-[80%] md:grid-cols-3 md:pb-16">
+<section id="features" class="relative z-20 mx-auto w-full max-w-[1440px] px-5 py-16 sm:px-8 sm:py-24 xl:px-12">
 
-    @forelse ($homeFeatures as $feature)
-        <article class="group relative overflow-hidden rounded-[10px] bg-white px-5 pb-7 pt-7 shadow-[0_10px_35px_rgba(0,0,0,0.12)] sm:px-7 sm:pb-8 sm:pt-9">
-            <span class="absolute -bottom-28 -right-20 h-48 w-48 rounded-full bg-primary/10 transition-all duration-500 ease-in-out group-hover:h-[800px] group-hover:w-[750px] group-hover:-bottom-48 group-hover:-right-48 group-hover:bg-primary/10 z-0"></span>
-            <div class="relative z-10">
-                <div class="mb-6 flex items-start justify-between">
-                    <div class="inline-flex h-20 w-20 items-end justify-start rounded-full bg-primary/10 transition-colors duration-500">
-                        <div class="bg-primary h-[67px] w-[67px] rounded-full inline-flex items-center justify-center">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        @forelse ($homeFeatures as $feature)
+            <article class="group relative flex flex-col overflow-hidden rounded-2xl bg-white p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] ring-1 ring-gray-100 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] sm:p-10">
+                
+                {{-- Top border accent --}}
+                <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-gray-100 to-gray-200 transition-all duration-500 group-hover:from-primary group-hover:to-red-700"></div>
+                
+                <div class="relative z-10 flex flex-1 flex-col">
+                    
+                    {{-- Icon and Number --}}
+                    <div class="mb-10 flex items-start justify-between">
+                        
+                        <div class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-[#080B12] text-primary shadow-lg ring-1 ring-gray-900/5 transition-transform duration-500 group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
                             @include('sections.home.feature-icon', ['position' => $feature->position])
                         </div>
+                        
+                        <span class="font-heading text-6xl font-black tracking-tighter text-gray-100 transition-colors duration-500 group-hover:text-primary/10">
+                            {{ $feature->displayNumber() }}
+                        </span>
+                        
                     </div>
-                    <span class="font-heading text-5xl font-bold leading-none text-gray-200 transition-colors duration-500 sm:text-[64px]">{{ $feature->displayNumber() }}</span>
+                    
+                    {{-- Text Content --}}
+                    <h3 class="mb-4 font-heading text-2xl font-bold tracking-tight text-gray-900 transition-colors duration-300 group-hover:text-primary">
+                        {{ $feature->title }}
+                    </h3>
+                    
+                    <p class="flex-1 font-sans text-base leading-relaxed text-gray-600">
+                        {{ $feature->description }}
+                    </p>
+                    
+                    {{-- Read more link (Optional visual anchor) --}}
+                    <div class="mt-8 flex items-center gap-2 opacity-0 transition-all duration-500 group-hover:opacity-100">
+                        <span class="h-px w-6 bg-primary"></span>
+                        <span class="font-heading text-[10px] font-bold uppercase tracking-widest text-primary">Discover</span>
+                    </div>
+                    
                 </div>
-                <h3 class="mb-3 font-heading text-2xl font-bold text-[#1c1c25] transition-colors duration-500 sm:mb-4 sm:text-[28px]">{{ $feature->title }}</h3>
-                <p class="text-base leading-8 text-gray-500 transition-colors duration-500 sm:text-[20px] sm:leading-[40px]">{{ $feature->description }}</p>
+            </article>
+        @empty
+            <div class="col-span-3 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-12 text-center">
+                <p class="font-sans text-sm font-medium text-gray-500 uppercase tracking-widest">Add feature copy in the admin under Home page → Features.</p>
             </div>
-        </article>
-    @empty
-        <p class="col-span-3 text-center text-gray-500">Add feature copy in the admin under Home page → Features.</p>
-    @endforelse
+        @endforelse
+    </div>
 
 </section>

@@ -1,29 +1,31 @@
-<section id="services" class="mx-auto max-w-[92%] px-4 py-14 sm:max-w-[88%] sm:px-6 lg:max-w-[80%] lg:px-24 lg:py-16">
+<section id="services" class="relative bg-gray-50 py-24 sm:py-32">
+    
+    <div class="mx-auto max-w-[1440px] px-5 sm:px-8 xl:px-12">
+        
+        <!-- Header -->
+        <div class="mb-16 text-center md:mb-20">
+            <h2 class="font-heading text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
+                Our Security Services
+            </h2>
+            <p class="mx-auto mt-4 max-w-2xl font-sans text-lg text-gray-600">
+                Comprehensive protection solutions tailored to meet your specific security needs and ensure absolute peace of mind.
+            </p>
+        </div>
 
-    <!-- Header -->
-    <div class="mb-14 text-center">
-        <p class="font-heading text-sm font-semibold uppercase tracking-[3px] text-primary">What We Do</p>
-        <h2 class="font-heading text-3xl font-bold text-[#1c1c25] sm:text-[38px]">Our Services</h2>
-        <span class="mx-auto mt-4 block h-[4px] w-14 rounded-xl bg-primary"></span>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+            @forelse ($homeServices as $service)
+                @include('partials.service-card', [
+                    'service' => $service,
+                    'featured' => false,
+                    'showDividerAfter' => false,
+                    'showBody' => false,
+                ])
+            @empty
+                <div class="col-span-full rounded-2xl border border-dashed border-gray-300 p-12 text-center">
+                    <p class="font-sans text-sm font-medium text-gray-500">Add services in Admin → Pages → Services.</p>
+                </div>
+            @endforelse
+        </div>
+        
     </div>
-
-    @forelse ($homeServices as $service)
-        @if ($loop->first)
-            <div class="flex flex-col items-start gap-8 lg:flex-row lg:justify-center">
-        @endif
-
-        @include('partials.service-card', [
-            'service' => $service,
-            'featured' => $homeServices->count() === 3 && $loop->iteration === 2,
-            'showDividerAfter' => ! $loop->last,
-            'showBody' => false,
-        ])
-
-        @if ($loop->last)
-            </div>
-        @endif
-    @empty
-        <p class="text-center text-gray-500">Add services in Admin → Pages → Services.</p>
-    @endforelse
-
 </section>

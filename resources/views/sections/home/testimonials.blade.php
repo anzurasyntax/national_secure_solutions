@@ -2,40 +2,31 @@
     $items = isset($testimonials) ? collect($testimonials) : collect();
 @endphp
 
-<section class="relative w-full overflow-hidden py-20 text-white"
-         style="background-image: url('{{ asset('img/testimonial_bg.png') }}'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 bg-black/70"></div>
+<section class="relative overflow-hidden bg-gray-50 py-24 sm:py-32">
+    {{-- Decorative subtle shapes --}}
+    <div class="absolute -right-40 top-0 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
+    <div class="absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-blue-900/5 blur-3xl"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-    <div class="relative z-10 mx-auto max-w-[92%] px-4 sm:max-w-[88%] lg:max-w-[80%]">
+    <div class="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 xl:px-12">
 
-        <div class="mb-10 flex items-start justify-between gap-4">
-            <div class="flex-1 text-center">
-                <p class="font-heading text-sm font-bold uppercase tracking-[3px] text-primary">Testimonials</p>
-                <h2 class="font-heading text-3xl font-bold text-white sm:text-[42px]">What Say Clients</h2>
-                <span class="mx-auto mt-4 block h-[3px] w-16 bg-primary"></span>
+        <div class="mb-16 flex flex-col items-center justify-center text-center md:mb-20">
+            <div class="mb-5 inline-flex items-center gap-3">
+                <span class="h-px w-10 bg-primary"></span>
+                <p class="font-heading text-xs font-bold uppercase tracking-[0.3em] text-primary">Testimonials</p>
+                <span class="h-px w-10 bg-primary"></span>
             </div>
-            @if ($items->count() > 1)
-                <div class="flex shrink-0 items-center gap-3 pt-2">
-                    <button id="testimonialPrev" type="button"
-                            class="text-primary transition-opacity hover:opacity-60">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-label="Previous">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                        </svg>
-                    </button>
-                    <button id="testimonialNext" type="button"
-                            class="text-primary transition-opacity hover:opacity-60">
-                        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-label="Next">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </button>
-                </div>
-            @endif
+            <h2 class="font-heading text-3xl font-bold uppercase tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
+                What Our Clients Say
+            </h2>
         </div>
 
-        <div class="relative mx-auto max-w-full lg:max-w-[80%]">
+        <div class="relative mx-auto max-w-4xl">
 
             @if ($items->isEmpty())
-                <p class="rounded-xl bg-white/10 px-8 py-12 text-center text-white/80">No testimonials yet. Add them under Admin → Home page → Testimonials.</p>
+                <div class="rounded-2xl border border-dashed border-gray-300 p-12 text-center text-gray-500">
+                    <p class="font-sans text-sm font-medium uppercase tracking-widest">No testimonials yet. Add them under Admin → Home page → Testimonials.</p>
+                </div>
             @else
                 <style>
                     [data-testimonial-slide]:not(.active) { display: none !important; }
@@ -43,38 +34,54 @@
 
                 <div id="tSlides" class="relative">
                     @foreach ($items as $index => $t)
-                        <div class="t-slide {{ $index === 0 ? 'active' : '' }} relative rounded-xl bg-white px-5 py-8 text-center shadow-2xl transition-all duration-500 sm:px-10 sm:py-9 lg:px-16 lg:py-10"
+                        <div class="t-slide {{ $index === 0 ? 'active' : '' }} relative rounded-2xl bg-white p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-gray-900/5 transition-all duration-500 sm:p-12 lg:p-16"
                              data-testimonial-slide>
-                            <div class="absolute -left-4 top-8 sm:-left-6 sm:top-1/2 sm:-translate-y-1/2 lg:-left-9">
-                                <div class="h-12 w-12 overflow-hidden rounded-full border-4 border-yellow-400 shadow-lg sm:h-14 sm:w-14 lg:h-[72px] lg:w-[72px]">
-                                    <img src="{{ $t->avatarUrl() }}" alt="{{ $t->name }}" class="h-full w-full object-cover">
-                                </div>
-                            </div>
-                            <div class="pointer-events-none absolute bottom-4 right-4 select-none font-serif text-5xl leading-none text-gray-200 sm:bottom-6 sm:right-8 sm:text-[80px]">
-                                <img src="{{ asset('img/testimonial.png') }}" alt="" style="opacity: 0.2;">
+                             
+                            {{-- Large quote icon --}}
+                            <div class="absolute -top-6 left-1/2 -translate-x-1/2 grid h-12 w-12 place-items-center rounded-xl bg-primary text-white shadow-lg sm:left-12 sm:translate-x-0">
+                                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
                             </div>
 
-                            <p class="mx-auto max-w-3xl text-base leading-8 text-gray-500 sm:text-lg sm:leading-9 lg:text-[17px] lg:leading-[1.9]">
-                                {{ $t->body }}
+                            <p class="mx-auto mt-6 text-center font-sans text-base leading-relaxed text-gray-600 sm:text-lg sm:leading-loose">
+                                "{{ $t->body }}"
                             </p>
-                            <div class="mt-6 flex justify-center gap-1 text-3xl text-yellow-400 sm:text-4xl" aria-hidden="true">
-                                {{ $t->starsDisplay() }}
+                            
+                            <div class="mt-10 flex flex-col items-center justify-center gap-4 border-t border-gray-100 pt-8 sm:flex-row sm:justify-between sm:text-left">
+                                <div class="flex items-center gap-4">
+                                    <img src="{{ $t->avatarUrl() }}" alt="{{ $t->name }}" class="h-14 w-14 rounded-full object-cover ring-2 ring-primary/20">
+                                    <div>
+                                        <h3 class="font-heading text-lg font-bold uppercase text-gray-900">{{ $t->name }}</h3>
+                                        <p class="font-sans text-sm text-gray-500">{{ $t->role }}</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-1 text-yellow-400">
+                                    {{ $t->starsDisplay() }}
+                                </div>
                             </div>
-                            <h3 class="mt-4 font-heading text-2xl font-extrabold uppercase text-[#1c1c25] sm:text-[28px]">{{ $t->name }}</h3>
-                            <p class="mt-1 text-sm font-semibold text-gray-400 sm:text-base">{{ $t->role }}</p>
                         </div>
                     @endforeach
                 </div>
 
+                @if ($items->count() > 1)
+                    <div class="mt-10 flex items-center justify-between">
+                        <div class="flex gap-2" id="testimonialDots">
+                            @foreach ($items as $index => $t)
+                                <button type="button" class="dots-btn h-2 w-2 rounded-full bg-gray-300 transition-all duration-300 hover:bg-gray-400 [&.active]:w-8 [&.active]:bg-primary {{ $index === 0 ? 'active' : '' }}" data-tdot="{{ $index }}" aria-label="Testimonial {{ $index + 1 }}"></button>
+                            @endforeach
+                        </div>
+                        
+                        <div class="flex gap-3">
+                            <button id="testimonialPrev" type="button" class="grid h-10 w-10 place-items-center rounded-full border border-gray-200 bg-white text-gray-400 transition hover:border-primary hover:bg-primary hover:text-white">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                            </button>
+                            <button id="testimonialNext" type="button" class="grid h-10 w-10 place-items-center rounded-full border border-gray-200 bg-white text-gray-400 transition hover:border-primary hover:bg-primary hover:text-white">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                @endif
+                
             @endif
         </div>
-
-        @if ($items->count() > 1)
-            <div class="relative z-10 mt-10 flex justify-center gap-2" id="testimonialDots">
-                @foreach ($items as $index => $t)
-                    <button type="button" class="dots-btn {{ $index === 0 ? 'active' : '' }}" data-tdot="{{ $index }}" aria-label="Testimonial {{ $index + 1 }}"></button>
-                @endforeach
-            </div>
-        @endif
     </div>
 </section>

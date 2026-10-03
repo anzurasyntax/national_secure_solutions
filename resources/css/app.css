@@ -6,6 +6,31 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-primary: #ee1a28;
+    --color-navy: #000080;
+    --color-ink: #070e20;
+    --font-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-heading: 'Roboto', sans-serif;
+    --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-fade-in: fade-in 1s ease-out forwards;
+
+    @keyframes fade-up {
+        0% {
+            opacity: 0;
+            transform: translateY(30px) translateX(-50%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) translateX(-50%);
+        }
+    }
+    
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 }

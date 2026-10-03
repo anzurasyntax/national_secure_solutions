@@ -5,24 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Trusted Security Service Phoenix, AZ | National Secure Solutions')</title>
     <meta name="description" content="@yield('meta_description', 'National Secure Solutions offers trained security guards and robust security equipment for homes, offices, and events. #1 security consultant in Phoenix, AZ.')">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#ee1a28",
-                        navy: "#000080",
-                        ink: "#070e20"
-                    },
-                    fontFamily: {
-                        sans: ["Roboto", "sans-serif"],
-                        heading: ["Roboto", "sans-serif"]
-                    }
-                }
-            }
-        };
-    </script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -102,23 +85,7 @@
         });
     </script>
     @stack('scripts')
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#e02020',
-                        navy: '#1a1f6e',
-                        ink: '#0b0f1e',
-                    },
-                    fontFamily: {
-                        heading: ['Roboto', 'sans-serif'],
-                        body: ['Roboto', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+
 
 </body>
 </html>

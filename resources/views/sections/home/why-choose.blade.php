@@ -1,28 +1,49 @@
 <section
     id="why-choose-us"
-    class="relative overflow-hidden py-20 text-white"
-    style="background-color: #070E20; background-image: url('{{ asset('img/stat_bg.png') }}'); background-size: cover; background-position: center center; background-repeat: no-repeat;"
+    class="relative overflow-hidden bg-[#050810] py-24 text-white lg:py-32"
 >
-    <div class="absolute inset-0" style="background-color: rgba(211, 211, 211, 0.15);"></div>
+    {{-- Decorative grid and glow --}}
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div class="absolute left-1/2 top-0 h-96 w-full -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.05),transparent_50%)]"></div>
+    
+    <div class="relative z-10 mx-auto max-w-[1440px] px-5 text-center sm:px-8 xl:px-12">
 
-    <div class="relative z-10 mx-auto max-w-[92%] px-4 text-center sm:max-w-[88%] lg:max-w-[80%]">
+        {{-- Header --}}
+        <div class="mb-16 flex flex-col items-center justify-center md:mb-24">
+            <div class="mb-5 inline-flex items-center gap-3">
+                <span class="h-px w-10 bg-primary"></span>
+                <p class="font-heading text-xs font-bold uppercase tracking-[0.3em] text-primary">Special Offer</p>
+                <span class="h-px w-10 bg-primary"></span>
+            </div>
+            <h2 class="font-heading text-3xl font-bold uppercase tracking-tight text-white sm:text-4xl md:text-5xl">
+                Why Choose Us
+            </h2>
+        </div>
 
-        <p class="font-heading text-sm font-bold uppercase tracking-[3px] text-primary">Special Offer</p>
-        <h2 class="mt-1 font-heading text-3xl font-extrabold uppercase tracking-wide sm:text-[42px]">WHY CHOOSE US</h2>
-        <span class="mx-auto mt-4 block h-[3px] w-16 bg-primary"></span>
-
-        <div class="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
 
             @forelse ($whyChooseItems as $item)
-                <article class="flex flex-col items-center px-2 text-center sm:px-6">
-                    <div class="mb-5 flex h-14 w-14 items-center justify-center sm:mb-7 sm:h-20 sm:w-20">
-                        <img src="{{ asset($item->icon_path) }}" alt="">
+                <article class="group relative flex flex-col items-center rounded-2xl border border-white/5 bg-white/5 p-8 transition-all duration-500 hover:-translate-y-2 hover:border-primary/20 hover:bg-white/10 sm:p-10">
+                    
+                    <div class="mb-8 grid h-20 w-20 place-items-center rounded-2xl bg-[#080B12] text-primary shadow-xl ring-1 ring-white/10 transition-transform duration-500 group-hover:scale-110 group-hover:ring-primary/50">
+                        <img src="{{ asset($item->icon_path) }}" alt="" class="h-10 w-10 object-contain">
                     </div>
-                    <h3 class="font-heading text-2xl font-extrabold uppercase tracking-wide text-white sm:text-[28px]">{{ $item->title }}</h3>
-                    <p class="mt-3 text-base font-normal leading-8 text-white sm:mt-4 sm:text-[20px] sm:leading-[1.85]">{{ $item->description }}</p>
+                    
+                    <h3 class="mb-4 font-heading text-xl font-bold uppercase tracking-wide text-white group-hover:text-primary transition-colors sm:text-2xl">
+                        {{ $item->title }}
+                    </h3>
+                    
+                    <p class="font-sans text-sm leading-relaxed text-white/60 sm:text-base">
+                        {{ $item->description }}
+                    </p>
+                    
+                    {{-- Hover line --}}
+                    <div class="absolute bottom-0 left-1/2 h-1 w-0 -translate-x-1/2 bg-primary transition-all duration-500 group-hover:w-full rounded-b-2xl"></div>
                 </article>
             @empty
-                <p class="col-span-full text-center text-white/70">Add content in Admin → Home page → Why Choose Us.</p>
+                <div class="col-span-full rounded-2xl border border-dashed border-white/20 p-12 text-center text-white/40">
+                    <p class="font-sans text-sm font-medium uppercase tracking-widest">Add content in Admin → Home page → Why Choose Us.</p>
+                </div>
             @endforelse
 
         </div>
